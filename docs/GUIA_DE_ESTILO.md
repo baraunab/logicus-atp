@@ -102,14 +102,12 @@ n[3] = 2;
     - Exemplo: `feature/sistema-de-dialogo`.
 - Nas categorias bugfix e hotfix, inicie o nome com o número do issue.
     - Exemplo: `bugfix/2-script-de-configuracao`.
+
 Categoria | Propósito
 --- | ---
 feature | Adição de nova funcionalidade.
---- | ---
 bugfix | Correção de bugs encontrados na secção de Issues.
---- | ---
 hotfix | Bugs críticos que já estão em produção.
---- | ---
 docs | Adição/correção de documentação e descrições do repositório.
 
 ## 1.0
