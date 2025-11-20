@@ -1,4 +1,6 @@
+#include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "raylib.h"
 
@@ -15,8 +17,8 @@ Texture2D carregarImagem(int nome, char *arquivo) {
 
 void carregarRecursos(Imagens *imagens) {
     // imagens de cenario
-    imagens->interface[SPLASH_ARTE] = carregarImagem(SPLASH_ARTE, "./imagens/arte_splash.png");
-    imagens->interface[TITULO_ARTE] = carregarImagem(TITULO_ARTE, "./imagens/arte_titulo.png");
+    imagens->interface[SPLASH_ARTE] = carregarImagem(SPLASH_ARTE, "../imagens/arte_splash.png");
+    imagens->interface[TITULO_ARTE] = carregarImagem(TITULO_ARTE, "../imagens/arte_titulo.png");
 
     // imagens interface
     // ..

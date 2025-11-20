@@ -34,6 +34,9 @@ int main(void) {
     InitWindow(LARGURA, ALTURA, "Logicus;");
     SetTargetFPS(60);
 
+    const char *diretorioExecutavel = GetApplicationDirectory();
+    ChangeDirectory(diretorioExecutavel);
+
     // carrega recursos de imagem do jogo
     carregarRecursos(&imagens);
 
