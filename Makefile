@@ -14,7 +14,7 @@ RL_LDD = $(PWD)/bibliotecas/raylib/src
 RL_INC = ./bibliotecas/raylib/src
 RG_INC = ./bibliotecas/raygui/src
 
-OBJS = recursos.o save.o dialogo.o main.o
+OBJS = recursos.o save.o dialogo.o main.o telas.o
 
 all: ./build/logicus
 
@@ -32,6 +32,9 @@ dialogo.o: ./src/dialogo.c
 
 recursos.o: ./src/recursos.c
 	$(CC) $(CFLAGS) -c ./src/recursos.c -I$(INCLUDE) -I$(RL_INC) -I$(RL_INC)
+	
+telas.o: ./src/telas.c
+	$(CC) $(CFLAGS) -c ./src/telas.c -I$(INCLUDE) -I$(RL_INC) -I$(RL_INC)
 
 clean:
 	@rm *.o ./build/logicus
