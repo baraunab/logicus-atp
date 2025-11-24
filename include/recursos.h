@@ -5,7 +5,9 @@
 typedef enum {
     SPLASH_ARTE,
     TITULO_ARTE,
+    IMAGEM_FUNDO,
     QTD_INTERFACES
+    
 } Interfaces;
 
 // identificadores de artes de cenarios

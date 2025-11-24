@@ -48,7 +48,7 @@ int main(void) {
 
         BeginDrawing();
             // limpa cor de fundo para proxima iteracao
-            ClearBackground(GetColor(GuiGetStyle(DEFAULT, BACKGROUND_COLOR)));
+            ClearBackground(GetColor(GuiGetStyle(DEFAULT, 20)));
 
             // através desta função acontecem todas as transições
             mudarTela(&tela, &imagens, LARGURA, ALTURA);

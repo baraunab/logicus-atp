@@ -14,7 +14,7 @@ RL_LDD = $(PWD)/bibliotecas/raylib/src
 RL_INC = ./bibliotecas/raylib/src
 RG_INC = ./bibliotecas/raygui/src
 
-OBJS = recursos.o save.o dialogo.o main.o telas.o
+OBJS = recursos.o save.o dialogo.o main.o mudarTela.o telaInicial.o telaMenu.o telaJogo.o telaMapa.o
 
 all: ./build/logicus
 
@@ -33,8 +33,21 @@ dialogo.o: ./src/dialogo.c
 recursos.o: ./src/recursos.c
 	$(CC) $(CFLAGS) -c ./src/recursos.c -I$(INCLUDE) -I$(RL_INC) -I$(RL_INC)
 	
-telas.o: ./src/telas.c
-	$(CC) $(CFLAGS) -c ./src/telas.c -I$(INCLUDE) -I$(RL_INC) -I$(RL_INC)
+mudarTela.o: ./src/mudarTela.c
+	$(CC) $(CFLAGS) -c ./src/mudarTela.c -I$(INCLUDE) -I$(RL_INC) -I$(RL_INC) -I$(RG_INC)
+
+telaInicial.o: ./src/telaInicial.c
+	$(CC) $(CFLAGS) -c ./src/telaInicial.c -I$(INCLUDE) -I$(RL_INC) -I$(RL_INC) -I$(RG_INC)
+
+telaMenu.o: ./src/telaMenu.c
+	$(CC) $(CFLAGS) -c ./src/telaMenu.c -I$(INCLUDE) -I$(RL_INC) -I$(RL_INC) -I$(RG_INC)
+
+telaJogo.o: ./src/telaJogo.c
+	$(CC) $(CFLAGS) -c ./src/telaJogo.c -I$(INCLUDE) -I$(RL_INC) -I$(RL_INC) -I$(RG_INC)
+
+telaMapa.o: ./src/telaMapa.c
+	$(CC) $(CFLAGS) -c ./src/telaMapa.c -I$(INCLUDE) -I$(RL_INC) -I$(RL_INC) -I$(RG_INC)
+
 
 clean:
 	@rm *.o ./build/logicus
