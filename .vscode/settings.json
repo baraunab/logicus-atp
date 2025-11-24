@@ -1,9 +1,0 @@
-{
-    "files.associations": {
-        "stdio.h": "c",
-        "*.m": "c",
-        "telas.h": "c",
-        "folhadeestilo.h": "c",
-        "raylib.h": "c"
-    }
-}
