@@ -51,7 +51,10 @@ int main(void) {
             ClearBackground(GetColor(GuiGetStyle(DEFAULT, 20)));
 
             // através desta função acontecem todas as transições
-            mudarTela(&tela, &imagens, LARGURA, ALTURA);
+            if (mudarTela(&tela, &imagens, LARGURA, ALTURA)) {
+                break;
+            }
+            
 
         EndDrawing();
 

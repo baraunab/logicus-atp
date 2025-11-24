@@ -1,4 +1,5 @@
 // se alterar, favor manter a ordem das includes de bibliotecas
+#include <stdio.h>
 #include <string.h>
 #include "raylib.h"
 #include "raygui.h"
@@ -26,7 +27,7 @@
     
 // FIM DAS VARIAVEIS DE CONTROLE -------------------------------------------------------------------------
 
-EstadoTela telaJogo(EstadoTela **tela, Imagens **imagens, int LARGURA, int ALTURA)
+EstadoTela telaJogo(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA)
 {
     /* levando em consideração que:
         typedef struct Rectangle {
@@ -37,8 +38,8 @@ EstadoTela telaJogo(EstadoTela **tela, Imagens **imagens, int LARGURA, int ALTUR
         } Rectangle;
     */
 
-    DrawTexture((**imagens).interface[IMAGEM_FUNDO], 0, 0, WHITE);
-    Rectangle fundoDeTela = {0, 0, 800, 480};
+    DrawTexture((*imagens).interface[IMAGEM_FUNDO], 0, 0, WHITE);
+    Rectangle fundoDeTela = {0, ALTURA * 0.04, 800, 480};
 
     // calcula área de clique baseada no tamanho do texto
     int larguraHistorico = MeasureText("Histórico", 12);
@@ -77,7 +78,7 @@ EstadoTela telaJogo(EstadoTela **tela, Imagens **imagens, int LARGURA, int ALTUR
         corStrHistorico = (Color){ 0, 255, 255, 255 };
         
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-            CloseWindow();
+            printf("Historico\n");
         }
 
     } else {
@@ -92,7 +93,7 @@ EstadoTela telaJogo(EstadoTela **tela, Imagens **imagens, int LARGURA, int ALTUR
         corStrPular = (Color){ 0, 255, 255, 255 };
         
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-            CloseWindow();
+            printf("Pular\n");
         }
 
     } else {
@@ -107,7 +108,7 @@ EstadoTela telaJogo(EstadoTela **tela, Imagens **imagens, int LARGURA, int ALTUR
         corStrAuto = (Color){ 0, 255, 255, 255 };
         
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-            CloseWindow();
+            printf("Auto\n");
         }
 
     } else {
@@ -122,7 +123,7 @@ EstadoTela telaJogo(EstadoTela **tela, Imagens **imagens, int LARGURA, int ALTUR
         corStrSalvar = (Color){ 0, 255, 255, 255 };
         
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-            CloseWindow();
+            printf("Salvar\n");
         }
 
     } else {
@@ -137,7 +138,7 @@ EstadoTela telaJogo(EstadoTela **tela, Imagens **imagens, int LARGURA, int ALTUR
         corStrCarregar = (Color){ 0, 255, 255, 255 };
         
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-            CloseWindow();
+            printf("Carregar\n");
         }
 
     } else {
@@ -146,8 +147,8 @@ EstadoTela telaJogo(EstadoTela **tela, Imagens **imagens, int LARGURA, int ALTUR
 
     // se (clicar na tela) OU apertar Enter OU apertar Espaçamento
     if ((CheckCollisionPointRec(GetMousePosition(), fundoDeTela) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) || IsKeyPressed(KEY_ENTER) || IsKeyPressed(KEY_SPACE)) {
-        //CloseWindow();
+        printf("Clique na tela/Enter/Espaçamento\n");
     }
     
-    return **tela;
+    return *tela;
 }
