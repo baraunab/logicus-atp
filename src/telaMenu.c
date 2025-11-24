@@ -54,7 +54,7 @@ EstadoTela telaMenu(EstadoTela **tela, Imagens **imagens, int LARGURA, int ALTUR
     // botão SAIR
     areaBotaoSair = (Rectangle){LARGURA / 4, ALTURA * 0.62, LARGURA / 2, ALTURA / 9};
     DrawRectangleRounded(areaBotaoSair, 0.3f, 10, (Color){0, 0, 0, transparencia});
-    DrawText("SAIR", LARGURA / 2.14, ALTURA * 0.654, tamanhoFontePadrao, corStrSair);
+    DrawText("SAIR", LARGURA / 2.12, ALTURA * 0.656, tamanhoFontePadrao, corStrSair);
     
     if (CheckCollisionPointRec(GetMousePosition(), areaBotaoJogar)) {
         
