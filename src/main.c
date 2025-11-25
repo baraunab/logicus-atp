@@ -11,9 +11,11 @@
 
 // importacao de arquivos header de prototipacao e carregamento
 
-#include "save.h"
-#include "dialogo.h"
+
+
 #include "recursos.h"
+#include "caixinhas.h"
+
 
 // declaracao de constantes globais
 // ...
@@ -128,6 +130,19 @@ EstadoTela telaMenu(EstadoTela **tela, Imagens **imagens){
 }
 
 EstadoTela telaJogo(EstadoTela **tela){
+    // aqui roda o desafio dentro da tela de jogo
+    EstadoTela telaJogo(EstadoTela **tela);{
+    // aqui roda o desafio dentro da tela de jogo
+    RodarDesafioCaixinhas();
+
+    // exemplo de transição pro mapa continua igual
+    if (IsKeyPressed(KEY_M)) {
+        return TELA_MAPA;
+    } else {
+        return **tela;
+    }
+}
+
     DrawText("TELA DO JOGO - Aperte \'M\' para abrir o mapa", 100, 200, 20, BLACK);
     if (IsKeyPressed(KEY_M))
     {

@@ -14,25 +14,33 @@ RL_LDD = $(PWD)/bibliotecas/raylib/src
 RL_INC = ./bibliotecas/raylib/src
 RG_INC = ./bibliotecas/raygui/src
 
-OBJS = recursos.o save.o dialogo.o main.o
+
+CPPFLAGS = -I$(RL_INC) -I$(RG_INC) -I$(INCLUDE)
+
+#isso aqui são os arquivos objeto, essa parte eu entendi
+OBJS = recursos.o save.o dialogo.o caixinhas.o main.o
 
 all: ./build/logicus
 
 ./build/logicus: $(OBJS)
-	gcc $(CFLAGS) $(OBJS) -o ./build/logicus -L$(RL_LDD) -Wl,-rpath=$(RL_LDD) $(DEPS)
+	$(CC) $(CFLAGS) $(OBJS) -o ./build/logicus -L$(RL_LDD) -Wl,-rpath=$(RL_LDD) $(DEPS)
 
 main.o: ./src/main.c
-	$(CC) $(CFLAGS) -c ./src/main.c -I$(RL_INC) -I$(RG_INC) -I$(INCLUDE)
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c ./src/main.c
 
 save.o: ./src/save.c
-	$(CC) $(CFLAGS) -c ./src/save.c
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c ./src/save.c
 
 dialogo.o: ./src/dialogo.c
-	$(CC) $(CFLAGS) -c ./src/dialogo.c
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c ./src/dialogo.c
 
 recursos.o: ./src/recursos.c
-	$(CC) $(CFLAGS) -c ./src/recursos.c -I$(INCLUDE) -I$(RL_INC) -I$(RL_INC)
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c ./src/recursos.c
+
+# regra nova pro teu módulo
+caixinhas.o: ./src/caixinhas.c
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c ./src/caixinhas.c
 
 clean:
-	@rm *.o ./build/logicus
+	@rm -f $(OBJS) ./build/logicus
 	@echo "limpeza feita!"
