@@ -27,11 +27,15 @@
 // declaracao de variaveis globais
 // ...
 
-
+// vetor com a quantidade de slots de save acessiveis para o usuario
+SaveEstado saveSlots[3];
 
 int main(void) {
     // aloca estaticamente memoria para recursos de imagem
     Imagens imagens = {0};
+    
+    // funcao auxiliar de inicializacao dos saves
+    inicializarSistemaDeSave(saveSlots);
 
     // declara a tela inicial ao abrir o programa
     EstadoTela tela = TELA_INICIAL;
