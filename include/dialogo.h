@@ -8,9 +8,9 @@ typedef struct {
 } Dialogo;
 
 // contador de linhas do arquivo
-int contaLinhas (FILE *arquivo);
+int contaLinhas (char *nomeArquivo);
 
 // função para carregar as linhas de dialogo
-Dialogo *carregarDialogo (FILE *arquivo, int linhas, int *totalDialogos);
+Dialogo *carregarDialogo (char *nomeArquivo, int linhas, int *totalDialogos);
 
 #endif // DIALOGO_H
