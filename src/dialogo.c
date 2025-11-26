@@ -30,7 +30,7 @@ int contaLinhas (FILE *arquivo) {
 Dialogo *carregarDialogo (FILE *arquivo, int linhas, int *totalDialogos) {
 
     // ponteiro que receberá cada linha de dialogo na estruturai
-    Dialogo *fala = (struct dialogo*) calloc(linhas, sizeof(Dialogo));
+    Dialogo *fala = (Dialogo *) calloc(linhas, sizeof(Dialogo));
     char aux[256]; // auxiliar para a separação do nome e texto      
     int dialogoAtual = 0; // contador
     
@@ -39,7 +39,7 @@ Dialogo *carregarDialogo (FILE *arquivo, int linhas, int *totalDialogos) {
     
     // laço para a leitura de cada linha do dialogo 
     for (dialogoAtual = 0; dialogoAtual < linhas; dialogoAtual++) {
-	// auxilar copia a linha no indicie atual
+	// auxiliar copia a linha no indicie atual
         fgets(aux, 256, arquivo);
 	
         // laço para encontrar o caractere separador ('|') entre nome e texto
