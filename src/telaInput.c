@@ -10,7 +10,7 @@
 // VARIAVEIS DE CONTROLE ---------------------------------------------------------------------------------
 
     // maximo de caracteres por linha com tamanho de fonte 20 é de 68 caracteres
-    char strEnunciado[] = "Escreva uma estrutura de repetição \"For()\" com os seguintes\nparâmetros: Índice (de nome \'i\') sendo um inteiro igual a 0; A Condição deve ser\numa comparação entre o índice e um inteiro igual a 10; O comando\ndeve incrementar uma unidade no índice a cada ciclo do laço.\n\nNão use chaves depois de fechar a função, apenas finalize (sem ponto\ne vírgula). Também preze pela legibilidade do código";
+    char strEnunciado[] = "Escreva uma estrutura de repetição \"For()\" com os seguintes\nparâmetros: Índice (de nome \'i\') sendo um inteiro igual a 0; A Condição\ndeve ser uma comparação entre o índice e um inteiro igual a 10; O\ncomando deve incrementar uma unidade no índice a cada ciclo do laço.\n\nNão use chaves depois de fechar a função, apenas finalize (sem ponto\ne vírgula). Também preze pela legibilidade do código";
     char resposta [] = "Digite aqui sua resposta.";
     char respostaCorreta [] = "for (int i = 0; i < 10; i++)";
 
