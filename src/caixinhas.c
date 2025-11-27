@@ -1,11 +1,12 @@
 // caixinhas.c
 #include "caixinhas.h"
+#include "telas.h"
 #include "raygui.h"   // para GuiButton
 
 #define LARGURA 800
 #define ALTURA  480
 // estrutura para representar cada caixinha/opção
-void RodarDesafioCaixinhas(void) {
+EstadoTela RodarDesafioCaixinhas(void) {
     static int iniciado = 0;
     static Caixinha opcoes[4];
     static Rectangle botaoVerificar;
@@ -112,4 +113,5 @@ void RodarDesafioCaixinhas(void) {
     if (mensagem[0] != '\0') {
         DrawText(mensagem, 70, 440, 20, corMensagem);
     }
+    return TELA_DESAFIO;
 }

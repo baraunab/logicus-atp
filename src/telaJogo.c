@@ -7,12 +7,14 @@
 // telas.h obrigatoriamente há de estar após recursos.h, senão dá erro ao não saber o que é uma Texture2D
 #include "telas.h"
 
+#include "caixinhas.h"
+
 // FOLHA DE ESTILO ---------------------------------------------------------------------------------------
 
     Color
         corStrHistorico = WHITE,
         corStrPular = WHITE,
-        corStrAuto = WHITE,
+        corStrAuto = {100,100,100,255},
         corStrSalvar = WHITE,
         corStrCarregar = WHITE;
     
@@ -93,7 +95,7 @@ EstadoTela telaJogo(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA)
         corStrPular = (Color){ 0, 255, 255, 255 };
         
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-            printf("Pular\n");
+            return TELA_DESAFIO;
         }
 
     } else {

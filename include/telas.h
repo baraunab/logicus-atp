@@ -1,11 +1,14 @@
 #ifndef TELAS_H
 #define TELAS_H
 
+#include "recursos.h"
+
 typedef enum {
     TELA_INICIAL = 0,
     TELA_MENU,
     TELA_JOGO,
     TELA_MAPA,
+    TELA_DESAFIO,
     SAIR
 } EstadoTela;
 
