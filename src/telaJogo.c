@@ -68,7 +68,7 @@ EstadoTela telaJogo(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA)
     DrawRectangleRounded((Rectangle){LARGURA * 0.01, ALTURA * 0.65, LARGURA * 0.98, ALTURA * 0.33}, 0.3f, 10, (Color){0, 0, 0, (255)/1.5});
     // DIALOGO INTERNO
     DrawText(strCaixaDialogo, LARGURA * 0.04, ALTURA * 0.7, 20, WHITE);
-    //GuiTextBox((Rectangle){LARGURA * 0.01, ALTURA * 0.55, LARGURA * 0.98, ALTURA * 0.43},"lorem ipsum dolor sit amet", 10, false);
+    
 
     // HISTORICO
     // detecta o mouse dentro da área do texto
@@ -147,8 +147,10 @@ EstadoTela telaJogo(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA)
 
     // se (clicar na tela) OU apertar Enter OU apertar Espaçamento
     if ((CheckCollisionPointRec(GetMousePosition(), fundoDeTela) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) || IsKeyPressed(KEY_ENTER) || IsKeyPressed(KEY_SPACE)) {
-        printf("Clique na tela/Enter/Espaçamento\n");
+        printf("Abrindo tela de input...\n");
+        return TELA_INPUT;
     }
+    
     
     return *tela;
 }

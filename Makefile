@@ -14,7 +14,7 @@ RL_LDD = $(PWD)/bibliotecas/raylib/src
 RL_INC = ./bibliotecas/raylib/src
 RG_INC = ./bibliotecas/raygui/src
 
-OBJS = recursos.o save.o dialogo.o main.o mudarTela.o telaInicial.o telaMenu.o telaJogo.o telaMapa.o
+OBJS = recursos.o save.o dialogo.o main.o mudarTela.o telaInicial.o telaMenu.o telaJogo.o telaMapa.o telaInput.o
 
 all: ./build/logicus
 
@@ -47,6 +47,9 @@ telaJogo.o: ./src/telaJogo.c
 
 telaMapa.o: ./src/telaMapa.c
 	$(CC) $(CFLAGS) -c ./src/telaMapa.c -I$(INCLUDE) -I$(RL_INC) -I$(RL_INC) -I$(RG_INC)
+
+telaInput.o: ./src/telaInput.c
+	$(CC) $(CFLAGS) -c ./src/telaInput.c -I$(INCLUDE) -I$(RL_INC) -I$(RL_INC) -I$(RG_INC)
 
 
 clean:
