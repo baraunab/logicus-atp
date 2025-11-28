@@ -2,3 +2,7 @@ Teste|Teste de diálogos
 Nome Teste|Frase que será inserida no diálogo
 Nome|Diálogo
 texto|texto texto texto texto texto
+teste1|aojopawdpoakdpoa
+teste2|1020192092128901
+teste3|++++++++++++++++
+final|----------------
