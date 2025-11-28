@@ -10,6 +10,7 @@ typedef enum {
     TELA_MAPA,
     TELA_INPUT,
     TELA_SAVES,
+    TELA_CAIXINHAS,
     SAIR
 } EstadoTela;
 
