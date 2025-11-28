@@ -17,14 +17,14 @@ void carregarRecursos(Imagens *imagens) {
     // imagens interface
     imagens->interface[SPLASH_ARTE] = carregarImagem(SPLASH_ARTE, "./imagens/arte_splash.png");
     imagens->interface[TITULO_ARTE] = carregarImagem(TITULO_ARTE, "./imagens/arte_titulo.png");
-    imagens->interface[IMAGEM_FUNDO] = carregarImagem(IMAGEM_FUNDO, "./imagens/teste.jpeg");
+    imagens->interface[IMAGEM_FUNDO] = carregarImagem(IMAGEM_FUNDO, "./imagens/torre.jpeg");
 
     // imagens de cenario
     imagens->cenario[DUNGEON] = carregarImagem(DUNGEON, "./imagens/dungeon.jpeg");
     imagens->cenario[TORRE] = carregarImagem(TORRE, "./imagens/torre.jpeg");
 
     // imagens de personagem
-    imagens->personagem[MAGA_COSTAS] = carregarImagem(MAGA_COSTAS, "./imagens/maga_costas.png");
+    imagens->personagem[MAGA_COSTAS] = carregarImagem(MAGA_COSTAS, "./imagens/maga_costas_teste.png");
 }
 
 void descarregarRecursos(Imagens *imagens) {

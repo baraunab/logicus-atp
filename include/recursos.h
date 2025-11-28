@@ -31,6 +31,9 @@ typedef struct {
     Texture2D personagem[QTD_PERSONAGENS];
 } Imagens;
 
+// 
+Texture2D carregarImagem(int nome, char *arquivo);
+
 // carrega todos os recursos do jogo (cenarios, personagens, elementos de interface, etc)
 void carregarRecursos(Imagens *imagens);
 

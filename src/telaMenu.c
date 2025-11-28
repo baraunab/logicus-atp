@@ -31,7 +31,7 @@
 
 EstadoTela telaMenu(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA) {
     // desenha splash arte do menu
-    DrawTexture((*imagens).interface[SPLASH_ARTE], 0, 0, WHITE);
+    DrawTexture((*imagens).cenario[TORRE], 0, 0, WHITE);
     DrawTexture((*imagens).interface[TITULO_ARTE], (LARGURA / 2) - 180, ALTURA / 28, WHITE);
 
     /* levando em consideração que:

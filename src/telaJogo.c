@@ -1,6 +1,6 @@
 // se alterar, favor manter a ordem das includes de bibliotecas
-#include <stdio.h>
 #include <string.h>
+#include <stdio.h>
 #include "raylib.h"
 #include "raygui.h"
 #include "dialogo.h"
@@ -27,6 +27,7 @@
 // FIM DAS VARIAVEIS DE CONTROLE -------------------------------------------------------------------------
 
 EstadoTela telaJogo(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA) {
+    
     // VARIÁVEIS USADAS NA LEITURA DE ARQUIVO DOS DIÁLOGOS -----------------------------------------------
     
     /* 
@@ -56,6 +57,12 @@ EstadoTela telaJogo(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA)
             float height; // altura do retângulo
         } Rectangle;
     */
+    /* TESTANDO REDIMENSIONAMENTO DO SPRITE DE PERSONAGENS
+    Rectangle src = { 0, 0, 100, 100};
+    Rectangle dst = { 0, 0, 100, 100};
+    Vector2 origin = {100, 100 };
+    DrawTexturePro((*imagens).personagem[MAGA_COSTAS], src, dst, origin, PURPLE);
+    */
 
     DrawTexture((*imagens).interface[IMAGEM_FUNDO], 0, 0, WHITE);
     Rectangle fundoDeTela = {0, ALTURA * 0.04, 800, 480};
@@ -73,11 +80,14 @@ EstadoTela telaJogo(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA)
     DrawText("Pular", areaPular.x, areaPular.y, 12, corStrPular);
     DrawText("Salvar", areaSalvamentos.x, areaSalvamentos.y, 12, corStrSalvamentos);
 
+
+    if (dialogoAtual == 5) { DrawTexture((*imagens).personagem[MAGA_COSTAS], 90, 20, WHITE); }
+
     // CAIXA DE DIALOGO
     DrawRectangleRounded((Rectangle){LARGURA * 0.01, ALTURA * 0.65, LARGURA * 0.98, ALTURA * 0.33}, 0.3f, 10, (Color){0, 0, 0, (255)/1.5});
 
     // CAIXA DO NOME 
-    DrawRectangleRounded((Rectangle){ LARGURA * 0.055, (ALTURA * 0.6) + 1, LARGURA * 0.2, (ALTURA * 0.05) + 12}, 0.3f, 12, BLACK);
+    DrawRectangleRounded((Rectangle){ LARGURA * 0.055, (ALTURA * 0.6) + 1, (LARGURA * 0.3) + 27, (ALTURA * 0.05) + 12}, 0.3f, 12, BLACK);
 
     // PULAR
     // detecta o mouse dentro da área do texto
@@ -117,13 +127,22 @@ EstadoTela telaJogo(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA)
         // verifica o indicie do dialogo lido
         if (saveEmUso->dialogoAtual < totalDialogos - 1) {
             // incrementa ao receber uma interação
-            saveEmUso->dialogoAtual++;
-            printf("%d\nClique na tela/Enter/Espaçamento\n", saveEmUso->dialogoAtual);
+            dialogoAtual++;
+            printf("%d\nClique na tela/Enter/Espaçamento\n", dialogoAtual);
+
+            if (dialogoAtual == 4) { // se o siálogo for maior que 1
+                // troca a imagem de fundo atual por essa do endereço
+                imagens->interface[IMAGEM_FUNDO] = carregarImagem(IMAGEM_FUNDO, "./imagens/dungeon.jpeg");
+            } else if (dialogoAtual == 6){
+                imagens->interface[IMAGEM_FUNDO] = carregarImagem(IMAGEM_FUNDO, "./imagens/arte_splash.png");
+            }
+
         } else {
             // verifica o fim da leitura do arquivo
             esperaInput = false;
         }
     }
+
 
     // TEXTO DO NOME
     DrawText(dialogos[saveEmUso->dialogoAtual].nome, (LARGURA * 0.06) + 5, (ALTURA * 0.6) + 8, 24, WHITE);
@@ -136,5 +155,5 @@ EstadoTela telaJogo(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA)
         printf("fim da leitura do arquivo");
     }
     
-     return *tela;
+    return *tela;
 } 
