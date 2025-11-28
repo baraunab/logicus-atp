@@ -17,7 +17,7 @@ int contaLinhas (char *nomeArquivo) {
     }
 
     char c; // percorre caractere por caractere no arquivo
-    int linhas = 0;      
+    int linhas = 0;
     
     // loop até o final do arquivo
     while (!feof(arquivo)) {

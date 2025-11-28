@@ -7,6 +7,8 @@
 #include "recursos.h"
 // telas.h obrigatoriamente há de estar após recursos.h, senão dá erro ao não saber o que é uma Texture2D
 #include "telas.h"
+#include "save.h"
+
 // FOLHA DE ESTILO ---------------------------------------------------------------------------------------
 
     Color
@@ -18,7 +20,7 @@
 
 // VARIAVEIS DE CONTROLE ---------------------------------------------------------------------------------
      
-    int dialogoAtual = 0; // inicia os indices de dialogos a serem lidos
+    // int dialogoAtual; // inicia os indices de dialogos a serem lidos
     
     // usar laço for() para realizar a quebra de linhas
     
@@ -60,7 +62,7 @@ EstadoTela telaJogo(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA)
 
     // calcula área de clique baseada no tamanho do texto
     int larguraPular = MeasureText("Pular", 12);
-    int larguraSalvar = MeasureText("Salvamentos", 12);
+    int larguraSalvar = MeasureText("Salvar", 12);
     int espacoInterno = 12;
     int offset = 0;
 
@@ -102,7 +104,8 @@ EstadoTela telaJogo(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA)
         corStrSalvamentos = (Color){ 0, 255, 255, 255 };
         
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-            printf("Salvamentos\n");
+            saveEmUso->dialogoAtual = saveEmUso->dialogoAtual;
+            salvarEstadoDeJogo(saveEmUso);
         }
 
     } else {
@@ -112,10 +115,10 @@ EstadoTela telaJogo(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA)
     // se (clicar na tela) OU apertar Enter OU apertar Espaçamento
     if ((CheckCollisionPointRec(GetMousePosition(), fundoDeTela) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) || IsKeyPressed(KEY_ENTER) || IsKeyPressed(KEY_SPACE)) {
         // verifica o indicie do dialogo lido
-        if (dialogoAtual < totalDialogos - 1) {
+        if (saveEmUso->dialogoAtual < totalDialogos - 1) {
             // incrementa ao receber uma interação
-            dialogoAtual++;
-            printf("%d\nClique na tela/Enter/Espaçamento\n", dialogoAtual);
+            saveEmUso->dialogoAtual++;
+            printf("%d\nClique na tela/Enter/Espaçamento\n", saveEmUso->dialogoAtual);
         } else {
             // verifica o fim da leitura do arquivo
             esperaInput = false;
@@ -123,10 +126,10 @@ EstadoTela telaJogo(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA)
     }
 
     // TEXTO DO NOME
-    DrawText(dialogos[dialogoAtual].nome, (LARGURA * 0.06) + 5, (ALTURA * 0.6) + 8, 24, WHITE);
+    DrawText(dialogos[saveEmUso->dialogoAtual].nome, (LARGURA * 0.06) + 5, (ALTURA * 0.6) + 8, 24, WHITE);
     
     // TEXTO DO DIÁLOGO
-    DrawText(dialogos[dialogoAtual].texto, LARGURA * 0.04, ALTURA * 0.7, 20, WHITE);
+    DrawText(dialogos[saveEmUso->dialogoAtual].texto, LARGURA * 0.04, ALTURA * 0.7, 20, WHITE);
     
     // se não houver mais interação, confirma o fim da leitura do arquivo
     if (!esperaInput) {

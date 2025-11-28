@@ -61,7 +61,7 @@ EstadoTela telaMenu(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA)
         corStrJogar = corStrDestaque;
         
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-            return TELA_JOGO;
+            return TELA_SAVES;
         }
 
     } else {
