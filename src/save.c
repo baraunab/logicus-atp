@@ -9,6 +9,9 @@
 #include "recursos.h"
 #include "telas.h"
 
+#define ALTURA 800
+#define LARGURA 480
+
 // estrutura com campos de informacao de um save especifico
 typedef struct {
     char nomeUsuario[64];
@@ -77,6 +80,10 @@ void carregarEstadoDeJogo(SaveEstado *estado) {
 EstadoTela telaSlotsSave() {
     Rectangle slots[3];
 
+    //Rectangle fundoDeTela = { 0, ALTURA * 0.04, 800, 480 };
+    DrawRectangle(0, 0, 800, 480, PURPLE);
+    //ClearBackground(GetColor(GuiGetStyle(DEFAULT, 20)));
+
     int espacamento = 8;
 
     int posicaoX = 16, posicaoY = 16;
@@ -88,11 +95,10 @@ EstadoTela telaSlotsSave() {
         "Slot 3"
     };
 
-
-
-    slots[0] = (Rectangle) { posicaoX, posicaoY + ((alturaBotao + espacamento)), larguraBotao, alturaBotao };
+    slots[0] = (Rectangle) { posicaoX, posicaoY, larguraBotao, alturaBotao };
     
-    if (GuiButton((Rectangle) { (posicaoX + larguraBotao) * 3, posicaoY, 64 , 64 }, "X")) {
+    GuiSetIconScale(2);
+    if (GuiButton((Rectangle) { (posicaoX + larguraBotao + espacamento), posicaoY, 64 , 64 }, "#143#")) {
         memset(saveEmUso, 0, sizeof(SaveEstado));
         salvarEstadoDeJogo(saveEmUso);
     }
