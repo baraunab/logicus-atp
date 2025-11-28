@@ -14,15 +14,17 @@ Texture2D carregarImagem(int nome, char *arquivo) {
 }
 
 void carregarRecursos(Imagens *imagens) {
-    // imagens de cenario
+    // imagens interface
     imagens->interface[SPLASH_ARTE] = carregarImagem(SPLASH_ARTE, "./imagens/arte_splash.png");
     imagens->interface[TITULO_ARTE] = carregarImagem(TITULO_ARTE, "./imagens/arte_titulo.png");
     imagens->interface[IMAGEM_FUNDO] = carregarImagem(IMAGEM_FUNDO, "./imagens/teste.jpeg");
-    // imagens interface
-    // ..
+
+    // imagens de cenario
+    imagens->cenario[DUNGEON] = carregarImagem(DUNGEON, "./imagens/dungeon.jpeg");
+    imagens->cenario[TORRE] = carregarImagem(TORRE, "./imagens/torre.jpeg");
 
     // imagens de personagem
-    // ...
+    imagens->personagem[MAGA_COSTAS] = carregarImagem(MAGA_COSTAS, "./imagens/maga_costas.png");
 }
 
 void descarregarRecursos(Imagens *imagens) {

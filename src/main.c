@@ -48,7 +48,7 @@ int main(void) {
     GuiSetStyle(DEFAULT, TEXT_SIZE, 30);
     
     // carrega recursos de imagem do jogo
-    carregarRecursos(&imagens);
+        carregarRecursos(&imagens);
 
     // inicia game loop para desenhar na janela
     while (!WindowShouldClose()) {

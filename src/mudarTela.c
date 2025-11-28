@@ -30,7 +30,7 @@ bool mudarTela(EstadoTela *telaAtual, Imagens *imagens, int LARGURA, int ALTURA)
         case TELA_INPUT:
             *telaAtual = telaInput(telaAtual, imagens, LARGURA, ALTURA);
             break;
-            
+        
         case SAIR:
             return true;
     }
