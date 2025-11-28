@@ -40,6 +40,8 @@ bool mudarTela(EstadoTela *telaAtual, Imagens *imagens, int LARGURA, int ALTURA,
 
          case TELA_SALA:
             *telaAtual = telaSala(imagens, LARGURA, ALTURA, idSalaAtual);
+            break;
+
          case TELA_CAIXINHAS:
             *telaAtual = RodarDesafioCaixinhas();
             break;
