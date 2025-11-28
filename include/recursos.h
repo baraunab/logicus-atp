@@ -13,12 +13,15 @@ typedef enum {
 // identificadores de artes de cenarios
 typedef enum {
     // TODO: desenhar e carregar cenarios
+    DUNGEON,
+    TORRE,
     QTD_CENARIOS
 } Cenarios;
 
 // identificadores de sprites de personagens
 typedef enum {
     // TODO: desenhar e carregar sprites de personagem
+    MAGA_COSTAS,
     QTD_PERSONAGENS
 } Personagens;
 
