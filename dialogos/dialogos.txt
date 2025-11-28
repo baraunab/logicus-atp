@@ -1,0 +1,4 @@
+Teste|Teste de diálogos
+Nome Teste|Frase que será inserida no diálogo
+Nome|Diálogo
+texto|texto texto texto texto texto

@@ -14,7 +14,7 @@ RL_LDD = $(PWD)/bibliotecas/raylib/src
 RL_INC = ./bibliotecas/raylib/src
 RG_INC = ./bibliotecas/raygui/src
 
-OBJS = caixinhas.o recursos.o save.o dialogo.o main.o mudarTela.o telaInicial.o telaMenu.o telaJogo.o telaMapa.o
+OBJS = caixinhas.o recursos.o save.o dialogo.o main.o mudarTela.o telaInicial.o telaMenu.o telaJogo.o telaMapa.o telaInput.o
 
 CPPFLAGS = -I$(RL_INC) -I$(RG_INC) -I$(INCLUDE)
 
@@ -46,6 +46,9 @@ telaMenu.o: ./src/telaMenu.c
 
 telaJogo.o: ./src/telaJogo.c
 	$(CC) $(CFLAGS) -c ./src/telaJogo.c -I$(INCLUDE) -I$(RL_INC) -I$(RL_INC) -I$(RG_INC)
+
+telaInput.o: ./src/telaInput.c
+	$(CC) $(CFLAGS) -c ./src/telaInput.c -I$(INCLUDE) -I$(RL_INC) -I$(RL_INC) -I$(RG_INC)
 
 telaMapa.o: ./src/telaMapa.c
 	$(CC) $(CFLAGS) -c ./src/telaMapa.c -I$(INCLUDE) -I$(RL_INC) -I$(RL_INC) -I$(RG_INC)

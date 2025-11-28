@@ -15,7 +15,7 @@
 #include "telas.h"
 #include "caixinhas.h"
 #include "save.h"
-
+#include "dialogo.h"
 // declaracao de constantes globais
 // ...
 
@@ -65,6 +65,9 @@ int main(void) {
     InitWindow(LARGURA, ALTURA, "Logicus;");
     SetTargetFPS(60);
 
+    // tamanho da fonte
+    GuiSetStyle(DEFAULT, TEXT_SIZE, 30);
+    
     // carrega recursos de imagem do jogo
     carregarRecursos(&imagens);
 
@@ -79,7 +82,6 @@ int main(void) {
             if (mudarTela(&tela, &imagens, LARGURA, ALTURA)) {
                 break;
             }
-            
 
         EndDrawing();
 

@@ -11,7 +11,11 @@ int contaLinhas (char *nomeArquivo) {
     
     // abre arquivo atribuido no parâmetro
     FILE *arquivo = fopen(nomeArquivo, "r");
-    
+    if  (arquivo == NULL) {
+        printf("dialogo.c/contaLinhas: Erro na abertura de arquivo!");
+        exit(1);
+    }
+
     char c; // percorre caractere por caractere no arquivo
     int linhas = 0;      
     
@@ -35,6 +39,11 @@ Dialogo *carregarDialogo (char *nomeArquivo, int linhas, int *totalDialogos) {
     
     // abre arquivo atribuido no parâmetro
     FILE *arquivo = fopen(nomeArquivo, "r");
+    if  (arquivo == NULL) {
+        printf("dialogo.c/carregaDialogo: Erro na abertura de arquivo!");
+        exit(1);
+    }
+
     
     // ponteiro que receberá cada linha de dialogo na estruturai
     Dialogo *fala = (Dialogo *) calloc(linhas, sizeof(Dialogo));
