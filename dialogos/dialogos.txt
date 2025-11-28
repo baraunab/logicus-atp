@@ -1,4 +1,11 @@
-Teste|Teste de diálogos
-Nome Teste|Frase que será inserida no diálogo
-Nome|Diálogo
-texto|texto texto texto texto texto
+Narrador|Saudações!! Este é o Logicus;
+Narrador|Este é o sistema de diálogos!!
+Narrador|A história do jogo será contada por aqui
+Outro narrador|A caixa acima indica quem está falando
+Narrador Secreto|Os cenários ilustram o que é contado no texto
+Narrador Secreto|Os personagens ajudam a visualizar a história
+Narrador Misterioso|Salvamos o jogo na opção acima: 'Salvar'
+Narrador Misterioso|E voltamos para esse ponto!
+Narrador Arrogante|Pressione 'M' para abrir o mapa de fases
+Narrador Arrogante|Cada fase terá desafios referentes aos conteúdos
+O Narrador|A partir daqui, vamos para as próximas funcionalidades!!

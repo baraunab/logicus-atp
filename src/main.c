@@ -29,18 +29,17 @@
 // ...
 
 // vetor com a quantidade de slots de save acessiveis para o usuario
-SaveEstado saveSlots[3];
 
 int main(void) {
+    // carrega saves de jogo existentes
+    inicializarSistemaDeSave();
+
     // aloca estaticamente memoria para recursos de imagem
     Imagens imagens = {0};
     
-    // funcao auxiliar de inicializacao dos saves
-    inicializarSistemaDeSave(saveSlots);
-
     // declara a tela inicial ao abrir o programa
-    EstadoTela tela = TELA_INICIAL;
-    
+    EstadoTela tela = TELA_MENU;
+  
     //Variavel para controlar em qual sala o jogador está
     int idSalaAtual = ID_SALA_NULA;
 

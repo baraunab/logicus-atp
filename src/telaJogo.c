@@ -1,6 +1,6 @@
 // se alterar, favor manter a ordem das includes de bibliotecas
-#include <stdio.h>
 #include <string.h>
+#include <stdio.h>
 #include "raylib.h"
 #include "raygui.h"
 #include "dialogo.h"
@@ -8,6 +8,8 @@
 #include "salas.h"
 // telas.h obrigatoriamente há de estar após recursos.h, senão dá erro ao não saber o que é uma Texture2D
 #include "telas.h"
+#include "save.h"
+
 // FOLHA DE ESTILO ---------------------------------------------------------------------------------------
 
     Color
@@ -19,7 +21,7 @@
 
 // VARIAVEIS DE CONTROLE ---------------------------------------------------------------------------------
      
-    int dialogoAtual = 0; // inicia os indices de dialogos a serem lidos
+    // int dialogoAtual; // inicia os indices de dialogos a serem lidos
     
     // usar laço for() para realizar a quebra de linhas
     
@@ -95,11 +97,19 @@ EstadoTela telaJogo(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA,
     
     // Fim do switch de chamada de ID -------------------------------------------------------------------
     
+    /* TESTANDO REDIMENSIONAMENTO DO SPRITE DE PERSONAGENS
+    Rectangle src = { 0, 0, 100, 100};
+    Rectangle dst = { 0, 0, 100, 100};
+    Vector2 origin = {100, 100 };
+    DrawTexturePro((*imagens).personagem[MAGA_COSTAS], src, dst, origin, PURPLE);
+    */
+
+    DrawTexture((*imagens).interface[IMAGEM_FUNDO], 0, 0, WHITE);
     Rectangle fundoDeTela = {0, ALTURA * 0.04, 800, 480};
 
     // calcula área de clique baseada no tamanho do texto
     int larguraPular = MeasureText("Pular", 12);
-    int larguraSalvar = MeasureText("Salvamentos", 12);
+    int larguraSalvar = MeasureText("Salvar", 12);
     int espacoInterno = 12;
     int offset = 0;
 
@@ -110,11 +120,14 @@ EstadoTela telaJogo(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA,
     DrawText("Pular", areaPular.x, areaPular.y, 12, corStrPular);
     DrawText("Salvar", areaSalvamentos.x, areaSalvamentos.y, 12, corStrSalvamentos);
 
+
+    if (saveEmUso->dialogoAtual == 5) { DrawTexture((*imagens).personagem[MAGA_COSTAS], 90, 20, WHITE); }
+
     // CAIXA DE DIALOGO
     DrawRectangleRounded((Rectangle){LARGURA * 0.01, ALTURA * 0.65, LARGURA * 0.98, ALTURA * 0.33}, 0.3f, 10, (Color){0, 0, 0, (255)/1.5});
 
     // CAIXA DO NOME 
-    DrawRectangleRounded((Rectangle){ LARGURA * 0.055, (ALTURA * 0.6) + 1, LARGURA * 0.2, (ALTURA * 0.05) + 12}, 0.3f, 12, BLACK);
+    DrawRectangleRounded((Rectangle){ LARGURA * 0.055, (ALTURA * 0.6) + 1, (LARGURA * 0.3) + 27, (ALTURA * 0.05) + 12}, 0.3f, 12, BLACK);
 
     // PULAR
     // detecta o mouse dentro da área do texto
@@ -141,7 +154,8 @@ EstadoTela telaJogo(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA,
         corStrSalvamentos = (Color){ 0, 255, 255, 255 };
         
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-            printf("Salvamentos\n");
+            saveEmUso->dialogoAtual = saveEmUso->dialogoAtual;
+            salvarEstadoDeJogo(saveEmUso, slotAtivo);
         }
 
     } else {
@@ -151,21 +165,30 @@ EstadoTela telaJogo(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA,
     // se (clicar na tela) OU apertar Enter OU apertar Espaçamento
     if ((CheckCollisionPointRec(GetMousePosition(), fundoDeTela) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) || IsKeyPressed(KEY_ENTER) || IsKeyPressed(KEY_SPACE)) {
         // verifica o indicie do dialogo lido
-        if (dialogoAtual < totalDialogos - 1) {
+        if (saveEmUso->dialogoAtual < totalDialogos - 1) {
             // incrementa ao receber uma interação
-            dialogoAtual++;
-            printf("%d\nClique na tela/Enter/Espaçamento\n", dialogoAtual);
+            saveEmUso->dialogoAtual++;
+            printf("%d\nClique na tela/Enter/Espaçamento\n", saveEmUso->dialogoAtual);
+
+            if (saveEmUso->dialogoAtual == 4) { // se o siálogo for maior que 1
+                // troca a imagem de fundo atual por essa do endereço
+                imagens->interface[IMAGEM_FUNDO] = carregarImagem(IMAGEM_FUNDO, "./imagens/dungeon.jpeg");
+            } else if (saveEmUso->dialogoAtual == 6){
+                imagens->interface[IMAGEM_FUNDO] = carregarImagem(IMAGEM_FUNDO, "./imagens/arte_splash.png");
+            }
+
         } else {
             // verifica o fim da leitura do arquivo
             esperaInput = false;
         }
     }
 
+
     // TEXTO DO NOME
-    DrawText(dialogos[dialogoAtual].nome, (LARGURA * 0.06) + 5, (ALTURA * 0.6) + 8, 24, WHITE);
+    DrawText(dialogos[saveEmUso->dialogoAtual].nome, (LARGURA * 0.06) + 5, (ALTURA * 0.6) + 8, 24, WHITE);
     
     // TEXTO DO DIÁLOGO
-    DrawText(dialogos[dialogoAtual].texto, LARGURA * 0.04, ALTURA * 0.7, 20, WHITE);
+    DrawText(dialogos[saveEmUso->dialogoAtual].texto, LARGURA * 0.04, ALTURA * 0.7, 20, WHITE);
     
     // se não houver mais interação, confirma o fim da leitura do arquivo
     if (!esperaInput) {

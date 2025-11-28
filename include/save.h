@@ -9,13 +9,18 @@ typedef struct {
 
     int pontuacao;
     int fase;
-    int numeroDialogo;
-    bool ativo;
+    int dialogoAtual;
 
-    int slot;
+    bool ativo;
 } SaveEstado;
 
-void inicializarSistemaDeSave(SaveEstado *estado);
-bool salvarEstadoDeJogo(SaveEstado estado);
-bool carregarEstadoDeJogo(SaveEstado *estado);
+extern SaveEstado *saveEmUso;
+extern int slotAtivo;
+extern SaveEstado saveSlots[3];
+
+bool salvarEstadoDeJogo(SaveEstado *estado, int slot);
+bool carregarEstadoDeJogo(SaveEstado *estado, int slot);
+EstadoTela telaSlotsSave(void);
+void inicializarSistemaDeSave(void);
+
 #endif // SAVE_H
