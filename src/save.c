@@ -33,9 +33,9 @@ char *nomesArquivosSave[3] = {
     "slot3"
 };
 
-void salvarEstadoDeJogo(SaveEstado *estado) {
+void salvarEstadoDeJogo(SaveEstado *estado, int slot) {
     char arquivo[256] = "./saves/";
-    strcat(arquivo, nomesArquivosSave[slotAtivo]);
+    strcat(arquivo, nomesArquivosSave[slot]);
 
     FILE *f = fopen(arquivo, "wb");
     
@@ -56,9 +56,9 @@ void salvarEstadoDeJogo(SaveEstado *estado) {
     fclose(f);
 }
 
-void carregarEstadoDeJogo(SaveEstado *estado) {
+void carregarEstadoDeJogo(SaveEstado *estado, int slot) {
     char arquivo[256] = "./saves/";
-    strcat(arquivo, nomesArquivosSave[slotAtivo]);
+    strcat(arquivo, nomesArquivosSave[slot]);
 
     // abrir arquivo binario para leitura
     FILE *f = fopen(arquivo, "rb");
@@ -67,7 +67,9 @@ void carregarEstadoDeJogo(SaveEstado *estado) {
     // validacao se arquivo pode ser encontrado/aberto
     if (f == NULL) {
         fprintf(stderr, "ERRO: impossivel abrir arquivo: %s\n", arquivo);
-        exit(1);
+        f = fopen(arquivo, "wb");
+        fclose(f);
+        return;
     }
     
     // ler dados e armazenar no estado passado para a funcao
@@ -95,45 +97,37 @@ EstadoTela telaSlotsSave() {
         "Slot 3"
     };
 
-    slots[0] = (Rectangle) { posicaoX, posicaoY, larguraBotao, alturaBotao };
-    
-    GuiSetIconScale(2);
-    if (GuiButton((Rectangle) { (posicaoX + larguraBotao + espacamento), posicaoY, 64 , 64 }, "#143#")) {
-        memset(saveEmUso, 0, sizeof(SaveEstado));
-        salvarEstadoDeJogo(saveEmUso);
-    }
-
-    if (GuiButton(slots[0], nomeBotoes[0])) {
-        slotAtivo = 0;
-
-        if (saveEmUso->ativo == true) {
-            carregarEstadoDeJogo(saveEmUso);
-        } else {
-            printf("Save inexistente\n");
-        }
-
-        return TELA_JOGO;
-    }
-
-    /*for (int i = 0; i < 3; ++i) {
+    for (int i = 0; i < 3; ++i) {
         slots[i] = (Rectangle) { posicaoX, posicaoY + ((alturaBotao + espacamento) * i), larguraBotao, alturaBotao };
-
+        Rectangle apagar = (Rectangle) { posicaoX + larguraBotao + espacamento, posicaoY + ((alturaBotao + espacamento) * i), alturaBotao, alturaBotao };
+        GuiSetIconScale(2);
+        if (GuiButton(apagar, "#143#")) {
+            memset(&saveSlots[i], 0, sizeof(SaveEstado));
+            salvarEstadoDeJogo(&saveSlots[i], i);
+            printf("LOG: Apagado save slot %d\n", i + 1);
+        }
         if (GuiButton(slots[i], nomeBotoes[i])) { 
             slotAtivo = i;
-            printf("Slot %d selecionado\n", i + 1);
+            printf("LOG: Slot %d selecionado\n", i + 1);
 
             saveEmUso = &saveSlots[i];
             
-            printf("saveEmUso->ativo = %d\n", saveEmUso->ativo);
             if (saveEmUso->ativo) {
-                carregarEstadoDeJogo(saveEmUso);
+                carregarEstadoDeJogo(saveEmUso, slotAtivo);
             }
             
             printf("saveEmUso->ativo = %d\n", saveEmUso->ativo);
 
             return TELA_JOGO;
         }
-    }*/
+    }
 
     return TELA_SAVES;
+}
+
+void inicializarSistemaDeSave(void) {
+    for (int i = 0; i < 3; ++i) {
+        carregarEstadoDeJogo(&saveSlots[i], i);
+        printf("LOG: Slot %d inicializado!\n", i + 1);
+    }
 }

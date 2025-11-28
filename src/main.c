@@ -30,11 +30,8 @@
 // vetor com a quantidade de slots de save acessiveis para o usuario
 
 int main(void) {
-    for (int i = 0; i < 3; ++i) {
-        memset(&saveSlots[i], 0, sizeof(SaveEstado));
-    }
-    
-    carregarEstadoDeJogo(saveEmUso);
+    // carrega saves de jogo existentes
+    inicializarSistemaDeSave();
 
     // aloca estaticamente memoria para recursos de imagem
     Imagens imagens = {0};

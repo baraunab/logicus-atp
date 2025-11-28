@@ -1,3 +1,6 @@
 bibliotecas
 build
 *.o
+saves/slot1
+saves/slot2
+saves/slot3
