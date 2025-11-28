@@ -61,10 +61,10 @@ EstadoTela telaJogo(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA)
     Vector2 origin = {100, 100 };
     DrawTexturePro((*imagens).personagem[MAGA_COSTAS], src, dst, origin, PURPLE);
     */
-    DrawTexture((*imagens).interface[SPLASH_ARTE], 0, 0, WHITE);
+
+    DrawTexture((*imagens).interface[IMAGEM_FUNDO], 0, 0, WHITE);
     Rectangle fundoDeTela = {0, ALTURA * 0.04, 800, 480};
 
-    DrawTexture((*imagens).personagem[MAGA_COSTAS], 90, 20, WHITE);
     // calcula área de clique baseada no tamanho do texto
     int larguraPular = MeasureText("Pular", 12);
     int larguraSalvar = MeasureText("Salvamentos", 12);
@@ -77,6 +77,9 @@ EstadoTela telaJogo(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA)
     // desenha a palavra
     DrawText("Pular", areaPular.x, areaPular.y, 12, corStrPular);
     DrawText("Salvar", areaSalvamentos.x, areaSalvamentos.y, 12, corStrSalvamentos);
+
+
+    if (dialogoAtual == 5) { DrawTexture((*imagens).personagem[MAGA_COSTAS], 90, 20, WHITE); }
 
     // CAIXA DE DIALOGO
     DrawRectangleRounded((Rectangle){LARGURA * 0.01, ALTURA * 0.65, LARGURA * 0.98, ALTURA * 0.33}, 0.3f, 10, (Color){0, 0, 0, (255)/1.5});
@@ -124,9 +127,11 @@ EstadoTela telaJogo(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA)
             dialogoAtual++;
             printf("%d\nClique na tela/Enter/Espaçamento\n", dialogoAtual);
 
-            if (dialogoAtual > 1) { // se o siálogo for maior que 1
+            if (dialogoAtual == 4) { // se o siálogo for maior que 1
                 // troca a imagem de fundo atual por essa do endereço
                 imagens->interface[IMAGEM_FUNDO] = carregarImagem(IMAGEM_FUNDO, "./imagens/dungeon.jpeg");
+            } else if (dialogoAtual == 6){
+                imagens->interface[IMAGEM_FUNDO] = carregarImagem(IMAGEM_FUNDO, "./imagens/arte_splash.png");
             }
 
         } else {
@@ -134,6 +139,7 @@ EstadoTela telaJogo(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA)
             esperaInput = false;
         }
     }
+
 
     // TEXTO DO NOME
     DrawText(dialogos[dialogoAtual].nome, (LARGURA * 0.06) + 5, (ALTURA * 0.6) + 8, 24, WHITE);

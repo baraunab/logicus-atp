@@ -2,7 +2,7 @@ Narrador|Saudações!! Este é o Logicus;
 Narrador|Este é o sistema de diálogos!!
 Narrador|A história do jogo será contada por aqui
 Outro narrador|A caixa acima indica quem está falando
-Narrador Secreto|Os cenários ilustram o que é contado aqui
+Narrador Secreto|Os cenários ilustram o que é contado no texto
 Narrador Secreto|Os personagens ajudam a visualizar a história
 Narrador Misterioso|Salvamos o jogo na opção acima
 Narrador Misterioso|E voltamos esse ponto!
