@@ -11,6 +11,7 @@ typedef enum {
     TELA_INPUT,
     TELA_SAVES,
     TELA_SALA,
+    TELA_CAIXINHAS,
     SAIR
 } EstadoTela;
 

@@ -10,6 +10,6 @@ typedef struct {
     int selecionada;
 } Caixinha;
 // função principal para rodar o desafio das caixinhas
-void RodarDesafioCaixinhas(void);
+EstadoTela RodarDesafioCaixinhas(void);
 
 #endif // CAIXINHAS_H

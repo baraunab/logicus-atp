@@ -162,7 +162,7 @@ EstadoTela telaInput(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA
                 desativarFundo = false;
             }
             if (IsKeyPressed(KEY_ENTER)) {
-                return TELA_JOGO;
+                return TELA_CAIXINHAS;
             }
             
 
@@ -182,8 +182,8 @@ EstadoTela telaInput(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA
                     resultado = false,
                     tabClicado = false;
                     desafioFeito = true;
-                    return TELA_JOGO;
-                    
+
+                    return TELA_CAIXINHAS;
                 }
 
             } else {
