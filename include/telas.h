@@ -6,6 +6,7 @@ typedef enum {
     TELA_MENU,
     TELA_JOGO,
     TELA_MAPA,
+    TELA_INPUT,
     SAIR
 } EstadoTela;
 
@@ -16,5 +17,6 @@ EstadoTela telaInicial(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTU
 EstadoTela telaMenu(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA);
 EstadoTela telaJogo(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA);
 EstadoTela telaMapa(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA);
+EstadoTela telaInput(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA);
 
 #endif

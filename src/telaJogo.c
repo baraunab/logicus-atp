@@ -10,27 +10,42 @@
 // FOLHA DE ESTILO ---------------------------------------------------------------------------------------
 
     Color
-        corStrHistorico = WHITE,
         corStrPular = WHITE,
-        corStrAuto = WHITE,
-        corStrSalvar = WHITE,
-        corStrCarregar = WHITE;
+        corStrSalvamentos = WHITE;
     
 // FIM DA FOLHA DE ESTILO --------------------------------------------------------------------------------
 
 
 // VARIAVEIS DE CONTROLE ---------------------------------------------------------------------------------
-    
-    int dialogoAtual = 0;
-    // maximo de caracteres por linha com tamanho de fonte 20 é de 68 caracteres
-    /*char strCaixaDialogo[] = "texto texto texto texto texto texto texto texto texto texto texto \ntexto texto texto texto texto texto texto texto texto texto texto \ntexto texto texto texto texto texto texto texto texto texto texto \ntexto texto texto texto texto texto texto texto texto texto texto \ntexto texto texto texto texto texto texto texto texto texto texto \n";*/
+     
+    int dialogoAtual = 0; // inicia os indices de dialogos a serem lidos
     
     // usar laço for() para realizar a quebra de linhas
     
 // FIM DAS VARIAVEIS DE CONTROLE -------------------------------------------------------------------------
 
-EstadoTela telaJogo(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA)
-{
+EstadoTela telaJogo(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA) {
+    // VARIÁVEIS USADAS NA LEITURA DE ARQUIVO DOS DIÁLOGOS -----------------------------------------------
+    
+    /* 
+       declaração feita dentro do escopo da função para serem usadas 
+       pelas outras funções referentes ao sistema de diálogos
+       para evitar o erro de "initializer element is not constant" 
+    */
+
+    // caminho do arquivo do diálogo
+    char *nomeArquivo = "./dialogos/dialogos.txt";
+    int totalDialogos = 0;      // quantidade de dialogos que será definida em carregarDialogo
+    bool esperaInput = true;    // verifica se ainda há inputs a serem recebidos na troca de dialogos
+    
+    // quantidade de linhas no arquivo
+    int linhas = contaLinhas(nomeArquivo);
+    
+    // carrega os diálogos
+    Dialogo *dialogos = carregarDialogo(nomeArquivo, linhas, &totalDialogos);
+    
+    // FIM DAS VARIÁVEIS DO DIÁLOGO ----------------------------------------------------------------------
+
     /* levando em consideração que:
         typedef struct Rectangle {
             float x;      // posição horizontal (eixo X)
@@ -39,66 +54,28 @@ EstadoTela telaJogo(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA)
             float height; // altura do retângulo
         } Rectangle;
     */
-    char *nomeArquivo = "./dialogos/dialogos.txt";
-    int totalDialogos = 0;
-    bool esperaInput = true; 
 
-    int linhas = contaLinhas(nomeArquivo);
-    Dialogo *dialogos = carregarDialogo(nomeArquivo, linhas, &totalDialogos);
-    
     DrawTexture((*imagens).interface[IMAGEM_FUNDO], 0, 0, WHITE);
     Rectangle fundoDeTela = {0, ALTURA * 0.04, 800, 480};
 
     // calcula área de clique baseada no tamanho do texto
-    int larguraHistorico = MeasureText("Histórico", 12);
-    Rectangle areaHistorico = {LARGURA * 0.3, ALTURA * 0.01, larguraHistorico, 12};
-
     int larguraPular = MeasureText("Pular", 12);
-    Rectangle areaPular = {LARGURA * 0.4, ALTURA * 0.01, larguraPular, 12};
+    int larguraSalvar = MeasureText("Salvamentos", 12);
+    int espacoInterno = 12;
+    int offset = 0;
 
-    int larguraAuto = MeasureText("Auto", 12);
-    Rectangle areaAuto = {LARGURA * 0.48725, ALTURA * 0.01 * 0.2, larguraAuto, 12};
-
-    int larguraSalvar = MeasureText("Salvar", 12);
-    Rectangle areaSalvar = {LARGURA * 0.54, ALTURA * 0.01 * 0.3, larguraSalvar, 12};
-
-    int larguraCarregar = MeasureText("Carregar", 12);
-    Rectangle areaCarregar = {LARGURA * 0.617, ALTURA * 0.01 * 0.4, larguraCarregar, 12};
+    Rectangle areaPular = {((LARGURA / 2) - larguraPular - espacoInterno) - offset, 8, larguraPular, 12};
+    Rectangle areaSalvamentos = {((LARGURA / 2) + espacoInterno) - offset, 8, larguraSalvar, 12};
 
     // desenha a palavra
-    DrawText("Histórico", LARGURA * 0.3, ALTURA * 0.01, 12, corStrHistorico);
-    DrawText("Pular", LARGURA * 0.4, ALTURA * 0.01, 12, corStrPular);
-    DrawText("Auto", LARGURA * 0.475, ALTURA * 0.01, 12, corStrAuto);
-    DrawText("Salvar", LARGURA * 0.54, ALTURA * 0.01, 12, corStrSalvar);
-    DrawText("Carregar", LARGURA * 0.617, ALTURA * 0.01, 12, corStrCarregar);
+    DrawText("Pular", areaPular.x, areaPular.y, 12, corStrPular);
+    DrawText("Salvar", areaSalvamentos.x, areaSalvamentos.y, 12, corStrSalvamentos);
 
     // CAIXA DE DIALOGO
     DrawRectangleRounded((Rectangle){LARGURA * 0.01, ALTURA * 0.65, LARGURA * 0.98, ALTURA * 0.33}, 0.3f, 10, (Color){0, 0, 0, (255)/1.5});
 
     // CAIXA DO NOME 
-    //DrawText(dialogos[dialogoAtual].nome, LARGURA * 0.06, ALTURA *0.6, 20, WHITE);
-    Rectangle nomeRect = { LARGURA * 0.055, ALTURA * 0.6, LARGURA * 0.5, ALTURA * 0.1 };
-    DrawRectangleRec(nomeRect, PURPLE);
-    // DIALOGO INTERNO
-    
-
-    //DrawText(dialogos[dialogoAtual].nome, LARGURA * 0.04, ALTURA * 0.7, 20, WHITE);
-    //GuiTextBox((Rectangle){LARGURA * 0.01, ALTURA * 0.55, LARGURA * 0.98, ALTURA * 0.43},"lorem ipsum dolor sit amet", 10, false);
-
-    // HISTORICO
-    // detecta o mouse dentro da área do texto
-    if (CheckCollisionPointRec(GetMousePosition(), areaHistorico)) {
-        
-        // mudar cor do texto ao passar o mouse por cima
-        corStrHistorico = (Color){ 0, 255, 255, 255 };
-        
-        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-            printf("Historico\n");
-        }
-
-    } else {
-        corStrHistorico = WHITE;
-    }
+    DrawRectangleRounded((Rectangle){ LARGURA * 0.055, (ALTURA * 0.6) + 1, LARGURA * 0.2, (ALTURA * 0.05) + 12}, 0.3f, 12, BLACK);
 
     // PULAR
     // detecta o mouse dentro da área do texto
@@ -109,74 +86,52 @@ EstadoTela telaJogo(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA)
         
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
             printf("Pular\n");
+            printf("Abrindo tela de input...\n");
+            return TELA_INPUT;
         }
 
     } else {
         corStrPular = WHITE;
     }
 
-    // AUTO
+    // SALVAMENTOS
     // detecta o mouse dentro da área do texto
-    if (CheckCollisionPointRec(GetMousePosition(), areaAuto)) {
+    if (CheckCollisionPointRec(GetMousePosition(), areaSalvamentos)) {
         
         // mudar cor do texto ao passar o mouse por cima
-        corStrAuto = (Color){ 0, 255, 255, 255 };
+        corStrSalvamentos = (Color){ 0, 255, 255, 255 };
         
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-            printf("Auto\n");
+            printf("Salvamentos\n");
         }
 
     } else {
-        corStrAuto = WHITE;
-    }
-    
-    // SALVAR
-    // detecta o mouse dentro da área do texto
-    if (CheckCollisionPointRec(GetMousePosition(), areaSalvar)) {
-        
-        // mudar cor do texto ao passar o mouse por cima
-        corStrSalvar = (Color){ 0, 255, 255, 255 };
-        
-        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-            printf("Salvar\n");
-        }
-
-    } else {
-        corStrSalvar = WHITE;
-    }
-
-    // CARREGAR
-    // detecta o mouse dentro da área do texto
-    if (CheckCollisionPointRec(GetMousePosition(), areaCarregar)) {
-        
-        // mudar cor do texto ao passar o mouse por cima
-        corStrCarregar = (Color){ 0, 255, 255, 255 };
-        
-        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-            printf("Carregar\n");
-        }
-
-    } else {
-        corStrCarregar = WHITE;
+        corStrSalvamentos = WHITE;
     }
 
     // se (clicar na tela) OU apertar Enter OU apertar Espaçamento
     if ((CheckCollisionPointRec(GetMousePosition(), fundoDeTela) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) || IsKeyPressed(KEY_ENTER) || IsKeyPressed(KEY_SPACE)) {
+        // verifica o indicie do dialogo lido
         if (dialogoAtual < totalDialogos - 1) {
+            // incrementa ao receber uma interação
             dialogoAtual++;
             printf("%d\nClique na tela/Enter/Espaçamento\n", dialogoAtual);
         } else {
+            // verifica o fim da leitura do arquivo
             esperaInput = false;
         }
     }
+
+    // TEXTO DO NOME
+    DrawText(dialogos[dialogoAtual].nome, (LARGURA * 0.06) + 5, (ALTURA * 0.6) + 8, 24, WHITE);
     
-    
-    DrawText(dialogos[dialogoAtual].nome, LARGURA * 0.06, ALTURA *0.6, 20, WHITE);
+    // TEXTO DO DIÁLOGO
     DrawText(dialogos[dialogoAtual].texto, LARGURA * 0.04, ALTURA * 0.7, 20, WHITE);
-
-     if (!esperaInput) {
+    
+    // se não houver mais interação, confirma o fim da leitura do arquivo
+    if (!esperaInput) {
         printf("fim da leitura do arquivo");
-     }
-
-    return *tela;
-}
+    }
+    
+     return *tela;
+} 
