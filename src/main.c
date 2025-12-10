@@ -17,6 +17,7 @@
 #include "save.h"
 #include "dialogo.h"
 #include "salas.h"
+#include "grimorio.h"
 // declaracao de constantes globais
 // ...
 

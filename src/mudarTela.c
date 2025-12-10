@@ -8,6 +8,8 @@
 #include "save.h"
 #include "telaSala.h"
 #include "caixinhas.h"
+#include "grimorio.h"
+#include "desafioCaixinhas.h"
 
 // função que muda de tela ativamente
 bool mudarTela(EstadoTela *telaAtual, Imagens *imagens, int LARGURA, int ALTURA, int *idSalaAtual)
@@ -44,6 +46,30 @@ bool mudarTela(EstadoTela *telaAtual, Imagens *imagens, int LARGURA, int ALTURA,
 
          case TELA_CAIXINHAS:
             *telaAtual = RodarDesafioCaixinhas();
+            break;
+           
+        case TELA_DESAFIO1:
+			*telaAtual = desafioCaixinhas1();
+            break;
+            
+		case TELA_DESAFIO2:
+			*telaAtual = desafioCaixinhas2();
+            break;
+            
+		case TELA_DESAFIO3:
+			*telaAtual = desafioCaixinhas3();
+            break;
+            
+		case TELA_DESAFIO4:
+			*telaAtual = desafioCaixinhas4();
+            break;
+            
+		case TELA_DESAFIO5:
+			*telaAtual = desafioCaixinhas5();
+            break;
+		
+        case TELA_GRIMORIO:
+            *telaAtual = telaGrimorio(telaAtual, imagens, LARGURA, ALTURA);
             break;
 
         case SAIR:

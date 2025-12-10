@@ -15,6 +15,7 @@ typedef enum {
     // TODO: desenhar e carregar cenarios
     DUNGEON,
     TORRE,
+    GRIMORIO,
     QTD_CENARIOS
 } Cenarios;
 

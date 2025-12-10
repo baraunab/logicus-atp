@@ -22,7 +22,7 @@ void carregarRecursos(Imagens *imagens) {
     // imagens de cenario
     imagens->cenario[DUNGEON] = carregarImagem(DUNGEON, "./imagens/dungeon.jpeg");
     imagens->cenario[TORRE] = carregarImagem(TORRE, "./imagens/torre.jpeg");
-
+    imagens->cenario[GRIMORIO] = carregarImagem(GRIMORIO, "./imagens/grimorio.png");
     // imagens de personagem
     imagens->personagem[MAGA_COSTAS] = carregarImagem(MAGA_COSTAS, "./imagens/maga_costas_teste.png");
 }

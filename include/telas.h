@@ -12,6 +12,12 @@ typedef enum {
     TELA_SAVES,
     TELA_SALA,
     TELA_CAIXINHAS,
+    TELA_GRIMORIO,
+    TELA_DESAFIO1,
+    TELA_DESAFIO2,
+    TELA_DESAFIO3,
+    TELA_DESAFIO4,
+    TELA_DESAFIO5,
     SAIR
 } EstadoTela;
 
@@ -23,5 +29,5 @@ EstadoTela telaMenu(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA)
 EstadoTela telaJogo(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA, int *idSalaAtual);
 EstadoTela telaMapa(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA, int *idSalaAtual);
 EstadoTela telaInput(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA);
-
+EstadoTela telaGrimorio(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA);
 #endif

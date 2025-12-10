@@ -9,7 +9,7 @@
 // telas.h obrigatoriamente há de estar após recursos.h, senão dá erro ao não saber o que é uma Texture2D
 #include "telas.h"
 #include "save.h"
-
+#include "grimorio.h"
 // FOLHA DE ESTILO ---------------------------------------------------------------------------------------
 
     Color
@@ -186,5 +186,10 @@ EstadoTela telaJogo(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA,
         return TELA_MAPA; // <--- ISSO É O QUE FAZ A TROCA DE TELA
     }
     
+    if (IsKeyPressed(KEY_I)) {
+        printf("Abrindo o Grimório...\n");
+        return TELA_GRIMORIO;
+    }
+
      return *tela;
 } 
