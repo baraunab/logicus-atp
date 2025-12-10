@@ -10,7 +10,7 @@
 #include "caixinhas.h"
 
 // função que muda de tela ativamente
-bool mudarTela(EstadoTela *telaAtual, Imagens *imagens, int LARGURA, int ALTURA, int *idSalaAtual)
+bool mudarTela(EstadoTela *telaAtual, Imagens *imagens, int LARGURA, int ALTURA)
 {
     // estrutura de controle das telas
     switch (*telaAtual) {
@@ -23,12 +23,34 @@ bool mudarTela(EstadoTela *telaAtual, Imagens *imagens, int LARGURA, int ALTURA,
             break;
 
         case TELA_JOGO:
-            *telaAtual = telaJogo(telaAtual, imagens, LARGURA, ALTURA, idSalaAtual);
+            *telaAtual = telaJogo(telaAtual, imagens, LARGURA, ALTURA);
             break;
 
         case TELA_MAPA:
-            *telaAtual = telaMapa(telaAtual, imagens, LARGURA, ALTURA, idSalaAtual);
+            *telaAtual = telaMapa(telaAtual, imagens, LARGURA, ALTURA);
             break;
+            
+        //Novas telas de fases
+        case TELA_ENTRADA:
+            *telaAtual = telaEntrada(imagens, LARGURA, ALTURA);
+            break;
+
+        case TELA_ENIGMA:
+            *telaAtual = telaEnigma(imagens, LARGURA, ALTURA);
+            break;
+
+        case TELA_BAU:
+            *telaAtual = telaBau(imagens, LARGURA, ALTURA);
+            break;
+
+        case TELA_LABIRINTO:
+            *telaAtual = telaLabirinto(imagens, LARGURA, ALTURA);
+            break;
+
+        case TELA_LACOS:
+            *telaAtual = telaLacos(imagens, LARGURA, ALTURA);
+            break;
+        //Fim das novas fases
 
         case TELA_INPUT:
             *telaAtual = telaInput(telaAtual, imagens, LARGURA, ALTURA);
@@ -36,10 +58,6 @@ bool mudarTela(EstadoTela *telaAtual, Imagens *imagens, int LARGURA, int ALTURA,
 
          case TELA_SAVES:
             *telaAtual = telaSlotsSave();
-            break;
-
-         case TELA_SALA:
-            *telaAtual = telaSala(imagens, LARGURA, ALTURA, idSalaAtual);
             break;
 
          case TELA_CAIXINHAS:

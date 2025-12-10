@@ -27,7 +27,7 @@
     
 // FIM DAS VARIAVEIS DE CONTROLE -------------------------------------------------------------------------
 
-EstadoTela telaJogo(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA, int *idSalaAtual) {
+EstadoTela telaJogo(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA) {
     // VARIÁVEIS USADAS NA LEITURA DE ARQUIVO DOS DIÁLOGOS -----------------------------------------------
     
     /* 

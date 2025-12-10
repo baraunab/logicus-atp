@@ -84,3 +84,33 @@ Dialogo *carregarDialogo (char *nomeArquivo, int linhas, int *totalDialogos) {
     return fala;
 }
 
+// Função que desenha a caixa e gerencia o clique para avançar
+bool GerenciarDialogo(Dialogo *dialogos, int *linhaAtual, int totalLinhas, int LARGURA, int ALTURA) {
+    
+    // Se já acabou as linhas, retorna false
+    if (*linhaAtual >= totalLinhas) return false;
+
+    //Desenho da interface
+    
+    // Caixa de Fundo (Transparente)
+    DrawRectangleRounded((Rectangle){LARGURA * 0.01, ALTURA * 0.65, LARGURA * 0.98, ALTURA * 0.33}, 0.3f, 10, (Color){0, 0, 0, 200});
+
+    // Caixa do Nome
+    DrawRectangleRounded((Rectangle){ LARGURA * 0.055, (ALTURA * 0.6) + 1, (LARGURA * 0.3) + 27, (ALTURA * 0.05) + 12}, 0.3f, 12, BLACK);
+
+    // Texto do Nome
+    DrawText(dialogos[*linhaAtual].nome, (LARGURA * 0.06) + 5, (ALTURA * 0.6) + 8, 24, YELLOW);
+    
+    // Texto da Fala
+    DrawText(dialogos[*linhaAtual].texto, LARGURA * 0.04, ALTURA * 0.7, 20, WHITE);
+
+    DrawText("Clique ou Enter para continuar...", LARGURA - 300, ALTURA - 30, 15, GRAY);
+
+    // Lógica de avançar dialogo
+    if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) || IsKeyPressed(KEY_ENTER) || IsKeyPressed(KEY_SPACE)) {
+        (*linhaAtual)++; // Vai para a próxima fala
+    }
+
+    return true; // Ainda tem diálogo acontecendo
+}
+
