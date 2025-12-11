@@ -4,6 +4,7 @@
 
 #include <stdbool.h>
 
+#include "recursos.h"
 #include "telas.h"
 #include "caixinhas.h"
 #include "grimorio.h"
@@ -11,14 +12,19 @@
 
 #define LARGURA 800
 #define ALTURA  480
+
+Color corRoxo = (Color){ 65, 22, 94, 255 };
+Color corRoxoEscuro = (Color){ 42, 0, 70, 255 };
+
 // estrutura para representar cada caixinha/opção
-EstadoTela desafioCaixinhas1(void) {
+EstadoTela desafioCaixinhas1(Imagens *imagens) {
 	
+    Color corRosa = (Color){ 153, 97, 137, 255 };
     static int iniciado = 0;
     static Caixinha opcoes[4];
     static Rectangle botaoVerificar;
     static const char *mensagem = "";
-    static Color corMensagem = BLACK;
+    Color corMensagem = corRosa;
 
     static float yCaixas = 320;
     static float larguraCaixa = 150;
@@ -28,29 +34,27 @@ EstadoTela desafioCaixinhas1(void) {
 // inicialização (executa apenas uma vez)( não é looping)
     if (!iniciado) {
     
-    	ClearBackground(RAYWHITE);
-    	
         float totalLargura = 4*larguraCaixa + 3*espacamento;
         xInicial = (LARGURA - totalLargura)/2.0f;
 
         opcoes[0] = (Caixinha){
             .area = (Rectangle){ xInicial + 0*(larguraCaixa+espacamento), yCaixas, larguraCaixa, alturaCaixa },
-            .texto = "printf", .correta = 0, .selecionada = 0
+            .texto = "<stdlib>", .correta = 0, .selecionada = 0
         };
 
         opcoes[1] = (Caixinha){
             .area = (Rectangle){ xInicial + 1*(larguraCaixa+espacamento), yCaixas, larguraCaixa, alturaCaixa },
-            .texto = "return", .correta = 0, .selecionada = 0
+            .texto = "<stdio>", .correta = 1, .selecionada = 0
         };
 
         opcoes[2] = (Caixinha){
             .area = (Rectangle){ xInicial + 2*(larguraCaixa+espacamento), yCaixas, larguraCaixa, alturaCaixa },
-            .texto = "if", .correta = 0, .selecionada = 0
+            .texto = "<string>", .correta = 0, .selecionada = 0
         };
 
         opcoes[3] = (Caixinha){
             .area = (Rectangle){ xInicial + 3*(larguraCaixa+espacamento), yCaixas, larguraCaixa, alturaCaixa },
-            .texto = "int", .correta = 1, .selecionada = 0
+            .texto = "<stdbool>", .correta = 0, .selecionada = 0
         };
 
         botaoVerificar = (Rectangle){ (LARGURA-200)/2.0f, 380, 200, 40 };
@@ -67,9 +71,13 @@ EstadoTela desafioCaixinhas1(void) {
             }
         }
     }
+    
+    ClearBackground(corRoxo);
+   
+    // DESAFIO 1: SELECAO DA BIBLIOTECA CORRETA
 
     // -------- DRAW (só desenha; a main já abriu o frame) --------
-    DrawText("AAAAAAAAAAAAAAAAAAAAA:", 40, 40, 28, BLACK);
+    DrawText("Desafio 1: Bibliotecas", 40, 40, 28, corRosa);
 
     Rectangle caixaCodigo = { 120, 120, 560, 140 };
     DrawRectangleRec(caixaCodigo, (Color){230,230,230,255});
@@ -78,23 +86,24 @@ EstadoTela desafioCaixinhas1(void) {
     int xCodigo = 150;
     int yCodigo = 160;
     // linha de código com espaço para a caixinha
-    DrawText("// desafio 1", xCodigo, yCodigo-30, 18, DARKGRAY);
+    DrawText("// chame a biblioteca correta para entrada e saida de dados", xCodigo, yCodigo-30, 18, DARKGRAY);
     
-    DrawText("____", xCodigo, yCodigo, 28, GRAY);
-    DrawText(" numero = 10;", xCodigo+80, yCodigo, 28, BLACK);
+    DrawText("#include", xCodigo, yCodigo, 28, GRAY);
+    DrawText(" <____>", xCodigo+120, yCodigo, 28, BLACK);
 
     for (int i = 0; i < 4; i++) {
         if (opcoes[i].selecionada) {
-            DrawRectangle(xCodigo-2, yCodigo-2, 90, 32, (Color){230,230,230,255});
-            DrawText(opcoes[i].texto, xCodigo, yCodigo, 28, DARKBLUE);
+            DrawRectangle(xCodigo+120, yCodigo-2, 95, 32, (Color){230,230,230,255});
+            DrawText(opcoes[i].texto, xCodigo+120, yCodigo, 28, DARKBLUE);
         }
     }
     // desenha as caixinhas/opções
     for (int i = 0; i < 4; i++) {
+        
         Caixinha *c = &opcoes[i];
         Color fundo = c->selecionada ? YELLOW : LIGHTGRAY;
         Color borda = c->selecionada ? ORANGE : DARKGRAY;
-
+        
         DrawRectangleRec(c->area, fundo);
         DrawRectangleLinesEx(c->area, 2, borda);
 
@@ -131,13 +140,14 @@ EstadoTela desafioCaixinhas1(void) {
     return TELA_DESAFIO1;
 }
 
-EstadoTela desafioCaixinhas2(void) {
+EstadoTela desafioCaixinhas2(Imagens *imagens) {
 	
+    Color corRosa = (Color){ 153, 97, 137, 255 };
     static int iniciado = 0;
     static Caixinha opcoes[4];
     static Rectangle botaoVerificar;
     static const char *mensagem = "";
-    static Color corMensagem = BLACK;
+    Color corMensagem = corRosa;
 
     static float yCaixas = 320;
     static float larguraCaixa = 150;
@@ -147,29 +157,27 @@ EstadoTela desafioCaixinhas2(void) {
 // inicialização (executa apenas uma vez)( não é looping)
     if (!iniciado) {
 	    
-	    ClearBackground(RAYWHITE);
-    
         float totalLargura = 4*larguraCaixa + 3*espacamento;
         xInicial = (LARGURA - totalLargura)/2.0f;
 
         opcoes[0] = (Caixinha){
             .area = (Rectangle){ xInicial + 0*(larguraCaixa+espacamento), yCaixas, larguraCaixa, alturaCaixa },
-            .texto = "printf", .correta = 0, .selecionada = 0
+            .texto = "texto;", .correta = 0, .selecionada = 0
         };
 
         opcoes[1] = (Caixinha){
             .area = (Rectangle){ xInicial + 1*(larguraCaixa+espacamento), yCaixas, larguraCaixa, alturaCaixa },
-            .texto = "return", .correta = 0, .selecionada = 0
+            .texto = "texto->10;", .correta = 0, .selecionada = 0
         };
 
         opcoes[2] = (Caixinha){
             .area = (Rectangle){ xInicial + 2*(larguraCaixa+espacamento), yCaixas, larguraCaixa, alturaCaixa },
-            .texto = "if", .correta = 0, .selecionada = 0
+            .texto = "int;", .correta = 0, .selecionada = 0
         };
 
         opcoes[3] = (Caixinha){
             .area = (Rectangle){ xInicial + 3*(larguraCaixa+espacamento), yCaixas, larguraCaixa, alturaCaixa },
-            .texto = "int", .correta = 1, .selecionada = 0
+            .texto = "texto[10];", .correta = 1, .selecionada = 0
         };
 
         botaoVerificar = (Rectangle){ (LARGURA-200)/2.0f, 380, 200, 40 };
@@ -186,9 +194,11 @@ EstadoTela desafioCaixinhas2(void) {
             }
         }
     }
+    
+    ClearBackground(corRoxo);
 
     // -------- DRAW (só desenha; a main já abriu o frame) --------
-    DrawText("AAAAAAAAAAAAAAAAAAAAA:", 40, 40, 28, WHITE);
+    DrawText("Desafio 2: Declaração de variáveis", 40, 40, 28, WHITE);
 
     Rectangle caixaCodigo = { 120, 120, 560, 140 };
     DrawRectangleRec(caixaCodigo, (Color){230,230,230,255});
@@ -197,15 +207,15 @@ EstadoTela desafioCaixinhas2(void) {
     int xCodigo = 150;
     int yCodigo = 160;
     // linha de código com espaço para a caixinha
-    DrawText("// desafio 2", xCodigo, yCodigo-30, 18, DARKGRAY);
+    DrawText("// declare uma variável de caracteres", xCodigo, yCodigo-30, 18, DARKGRAY);
     
-    DrawText("____", xCodigo, yCodigo, 28, GRAY);
-    DrawText(" numero = 10;", xCodigo+80, yCodigo, 28, BLACK);
+    DrawText("char ", xCodigo, yCodigo, 28, GRAY);
+    DrawText("  _____", xCodigo+60, yCodigo, 28, BLACK);
 
     for (int i = 0; i < 4; i++) {
         if (opcoes[i].selecionada) {
-            DrawRectangle(xCodigo-2, yCodigo-2, 90, 32, (Color){230,230,230,255});
-            DrawText(opcoes[i].texto, xCodigo, yCodigo, 28, DARKBLUE);
+            DrawRectangle(xCodigo+78, yCodigo-2, 95, 32, (Color){230,230,230,255});
+            DrawText(opcoes[i].texto, xCodigo+78, yCodigo, 28, DARKBLUE);
         }
     }
     // desenha as caixinhas/opções
@@ -250,13 +260,15 @@ EstadoTela desafioCaixinhas2(void) {
     return TELA_DESAFIO2;
 }
 
-EstadoTela desafioCaixinhas3(void) {
-	
+EstadoTela desafioCaixinhas3(Imagens *imagens) {
+
+    Color corRosa = (Color){ 153, 97, 137, 255 };
+
     static int iniciado = 0;
     static Caixinha opcoes[4];
     static Rectangle botaoVerificar;
     static const char *mensagem = "";
-    static Color corMensagem = BLACK;
+    Color corMensagem = corRosa;
 
     static float yCaixas = 320;
     static float larguraCaixa = 150;
@@ -266,29 +278,27 @@ EstadoTela desafioCaixinhas3(void) {
 // inicialização (executa apenas uma vez)( não é looping)
     if (!iniciado) {
 	    
-	    ClearBackground(RAYWHITE);
-    
         float totalLargura = 4*larguraCaixa + 3*espacamento;
         xInicial = (LARGURA - totalLargura)/2.0f;
 
         opcoes[0] = (Caixinha){
             .area = (Rectangle){ xInicial + 0*(larguraCaixa+espacamento), yCaixas, larguraCaixa, alturaCaixa },
-            .texto = "printf", .correta = 0, .selecionada = 0
+            .texto = "\%f", .correta = 1, .selecionada = 0
         };
 
         opcoes[1] = (Caixinha){
             .area = (Rectangle){ xInicial + 1*(larguraCaixa+espacamento), yCaixas, larguraCaixa, alturaCaixa },
-            .texto = "return", .correta = 0, .selecionada = 0
+            .texto = "\%d", .correta = 0, .selecionada = 0
         };
 
         opcoes[2] = (Caixinha){
             .area = (Rectangle){ xInicial + 2*(larguraCaixa+espacamento), yCaixas, larguraCaixa, alturaCaixa },
-            .texto = "if", .correta = 0, .selecionada = 0
+            .texto = "\%lf", .correta = 0, .selecionada = 0
         };
 
         opcoes[3] = (Caixinha){
             .area = (Rectangle){ xInicial + 3*(larguraCaixa+espacamento), yCaixas, larguraCaixa, alturaCaixa },
-            .texto = "int", .correta = 1, .selecionada = 0
+            .texto = "\%c", .correta = 0, .selecionada = 0
         };
 
         botaoVerificar = (Rectangle){ (LARGURA-200)/2.0f, 380, 200, 40 };
@@ -306,8 +316,10 @@ EstadoTela desafioCaixinhas3(void) {
         }
     }
 
+    ClearBackground(corRoxo);
+
     // -------- DRAW (só desenha; a main já abriu o frame) --------
-    DrawText("AAAAAAAAAAAAAAAAAAAAA:", 40, 40, 28, WHITE);
+    DrawText("Desafio 3: Entrada de dados", 40, 40, 28, WHITE);
 
     Rectangle caixaCodigo = { 120, 120, 560, 140 };
     DrawRectangleRec(caixaCodigo, (Color){230,230,230,255});
@@ -316,15 +328,16 @@ EstadoTela desafioCaixinhas3(void) {
     int xCodigo = 150;
     int yCodigo = 160;
     // linha de código com espaço para a caixinha
-    DrawText("// desafio 3", xCodigo, yCodigo-30, 18, DARKGRAY);
+    DrawText("// Considere a variável declarada. \n// Imprima ela usando o formatador equivalente ", xCodigo-20, yCodigo-30, 18, DARKGRAY);
     
-    DrawText("____", xCodigo, yCodigo, 28, GRAY);
-    DrawText(" numero = 10;", xCodigo+80, yCodigo, 28, BLACK);
+    DrawText("float poderDasSombras = 1000;", xCodigo, yCodigo+15, 20, corRoxo);
+
+    DrawText("printf(\"Poder Sombrio: ___ \", poderDasSombras)", xCodigo, yCodigo+40, 20, GRAY);
 
     for (int i = 0; i < 4; i++) {
         if (opcoes[i].selecionada) {
-            DrawRectangle(xCodigo-2, yCodigo-2, 90, 32, (Color){230,230,230,255});
-            DrawText(opcoes[i].texto, xCodigo, yCodigo, 28, DARKBLUE);
+            DrawRectangle(xCodigo+238, yCodigo+40, 40, 32, (Color){230,230,230,255});
+            DrawText(opcoes[i].texto, xCodigo+242, yCodigo+40, 20, DARKBLUE);
         }
     }
     // desenha as caixinhas/opções
@@ -369,13 +382,15 @@ EstadoTela desafioCaixinhas3(void) {
     return TELA_DESAFIO3;
 }
 
-EstadoTela desafioCaixinhas4(void) {
+EstadoTela desafioCaixinhas4(Imagens *imagens) {
 	
+    Color corRosa = (Color){ 153, 97, 137, 255 };
+    
     static int iniciado = 0;
     static Caixinha opcoes[4];
     static Rectangle botaoVerificar;
     static const char *mensagem = "";
-    static Color corMensagem = BLACK;
+    Color corMensagem = corRosa;
 
     static float yCaixas = 320;
     static float larguraCaixa = 150;
@@ -385,29 +400,27 @@ EstadoTela desafioCaixinhas4(void) {
 // inicialização (executa apenas uma vez)( não é looping)
     if (!iniciado) {
 	    
-	    ClearBackground(RAYWHITE);
-    
         float totalLargura = 4*larguraCaixa + 3*espacamento;
         xInicial = (LARGURA - totalLargura)/2.0f;
 
         opcoes[0] = (Caixinha){
             .area = (Rectangle){ xInicial + 0*(larguraCaixa+espacamento), yCaixas, larguraCaixa, alturaCaixa },
-            .texto = "printf", .correta = 0, .selecionada = 0
+            .texto = "vida;", .correta = 0, .selecionada = 0
         };
 
         opcoes[1] = (Caixinha){
             .area = (Rectangle){ xInicial + 1*(larguraCaixa+espacamento), yCaixas, larguraCaixa, alturaCaixa },
-            .texto = "return", .correta = 0, .selecionada = 0
+            .texto = "\"Morto\";", .correta = 0, .selecionada = 0
         };
 
         opcoes[2] = (Caixinha){
             .area = (Rectangle){ xInicial + 2*(larguraCaixa+espacamento), yCaixas, larguraCaixa, alturaCaixa },
-            .texto = "if", .correta = 0, .selecionada = 0
+            .texto = "estado;", .correta = 1, .selecionada = 0
         };
 
         opcoes[3] = (Caixinha){
             .area = (Rectangle){ xInicial + 3*(larguraCaixa+espacamento), yCaixas, larguraCaixa, alturaCaixa },
-            .texto = "int", .correta = 1, .selecionada = 0
+            .texto = "if;", .correta = 0, .selecionada = 0
         };
 
         botaoVerificar = (Rectangle){ (LARGURA-200)/2.0f, 380, 200, 40 };
@@ -425,27 +438,35 @@ EstadoTela desafioCaixinhas4(void) {
         }
     }
 
-    // -------- DRAW (só desenha; a main já abriu o frame) --------
-    DrawText("AAAAAAAAAAAAAAAAAAAAA:", 40, 40, 28, WHITE);
+    ClearBackground(corRoxo);
 
-    Rectangle caixaCodigo = { 120, 120, 560, 140 };
+    // -------- DRAW (só desenha; a main já abriu o frame) --------
+
+    DrawText("Desafio 4: Condicional", 40, 40, 28, WHITE);
+    
+    Rectangle caixaCodigo = { 120, 120, 560, 150 };
     DrawRectangleRec(caixaCodigo, (Color){230,230,230,255});
     DrawRectangleLinesEx(caixaCodigo, 2, DARKGRAY);
 
     int xCodigo = 150;
     int yCodigo = 160;
     // linha de código com espaço para a caixinha
-    DrawText("// desafio 4", xCodigo, yCodigo-30, 18, DARKGRAY);
+    DrawText("// Considere a condição. \n// Retorne o variavel correta.", xCodigo-20, yCodigo-30, 18, DARKGRAY);
     
-    DrawText("____", xCodigo, yCodigo, 28, GRAY);
-    DrawText(" numero = 10;", xCodigo+80, yCodigo, 28, BLACK);
+    DrawText("char estado[5] = \"Morto\";", xCodigo, yCodigo+15, 20, corRoxo);
+
+    DrawText("if (vida == 0) {", xCodigo, yCodigo+40, 20, GRAY);
+    DrawText("return  ____ ", xCodigo+25, yCodigo+61, 20, GRAY);
+    DrawText("}", xCodigo, yCodigo+81, 20, GRAY);
 
     for (int i = 0; i < 4; i++) {
         if (opcoes[i].selecionada) {
-            DrawRectangle(xCodigo-2, yCodigo-2, 90, 32, (Color){230,230,230,255});
-            DrawText(opcoes[i].texto, xCodigo, yCodigo, 28, DARKBLUE);
+            DrawRectangle(xCodigo+104, yCodigo+61, 55, 32, (Color){230,230,230,255});
+            DrawText(opcoes[i].texto, xCodigo+104, yCodigo+61, 20, DARKBLUE);
         }
     }
+
+    
     // desenha as caixinhas/opções
     for (int i = 0; i < 4; i++) {
         Caixinha *c = &opcoes[i];
@@ -488,13 +509,15 @@ EstadoTela desafioCaixinhas4(void) {
     return TELA_DESAFIO4;
 }
 
-EstadoTela desafioCaixinhas5(void) {
-	
+EstadoTela desafioCaixinhas5(Imagens *imagens) {
+    	
+    Color corRosa = (Color){ 153, 97, 137, 255 };
+    
     static int iniciado = 0;
     static Caixinha opcoes[4];
     static Rectangle botaoVerificar;
     static const char *mensagem = "";
-    static Color corMensagem = BLACK;
+    Color corMensagem = corRosa;
 
     static float yCaixas = 320;
     static float larguraCaixa = 150;
@@ -504,29 +527,27 @@ EstadoTela desafioCaixinhas5(void) {
 // inicialização (executa apenas uma vez)( não é looping)
     if (!iniciado) {
 	    
-	    ClearBackground(RAYWHITE);
-    
         float totalLargura = 4*larguraCaixa + 3*espacamento;
         xInicial = (LARGURA - totalLargura)/2.0f;
 
         opcoes[0] = (Caixinha){
             .area = (Rectangle){ xInicial + 0*(larguraCaixa+espacamento), yCaixas, larguraCaixa, alturaCaixa },
-            .texto = "printf", .correta = 0, .selecionada = 0
+            .texto = "i < 15;", .correta = 1, .selecionada = 0
         };
 
         opcoes[1] = (Caixinha){
             .area = (Rectangle){ xInicial + 1*(larguraCaixa+espacamento), yCaixas, larguraCaixa, alturaCaixa },
-            .texto = "return", .correta = 0, .selecionada = 0
+            .texto = "i != 10;", .correta = 0, .selecionada = 0
         };
 
         opcoes[2] = (Caixinha){
             .area = (Rectangle){ xInicial + 2*(larguraCaixa+espacamento), yCaixas, larguraCaixa, alturaCaixa },
-            .texto = "if", .correta = 0, .selecionada = 0
+            .texto = "i == 20;", .correta = 0, .selecionada = 0
         };
 
         opcoes[3] = (Caixinha){
             .area = (Rectangle){ xInicial + 3*(larguraCaixa+espacamento), yCaixas, larguraCaixa, alturaCaixa },
-            .texto = "int", .correta = 1, .selecionada = 0
+            .texto = "i > 0;", .correta = 0, .selecionada = 0
         };
 
         botaoVerificar = (Rectangle){ (LARGURA-200)/2.0f, 380, 200, 40 };
@@ -544,27 +565,31 @@ EstadoTela desafioCaixinhas5(void) {
         }
     }
 
-    // -------- DRAW (só desenha; a main já abriu o frame) --------
-    DrawText("AAAAAAAAAAAAAAAAAAAAA:", 40, 40, 28, WHITE);
-
-    Rectangle caixaCodigo = { 120, 120, 560, 140 };
+    ClearBackground(corRoxo);
+    
+     DrawText("Desafio 5: Laço de Repetição", 40, 40, 28, WHITE);
+    
+    Rectangle caixaCodigo = { 120, 120, 560, 150 };
     DrawRectangleRec(caixaCodigo, (Color){230,230,230,255});
     DrawRectangleLinesEx(caixaCodigo, 2, DARKGRAY);
 
     int xCodigo = 150;
     int yCodigo = 160;
     // linha de código com espaço para a caixinha
-    DrawText("// desafio 5", xCodigo, yCodigo-30, 18, DARKGRAY);
+    DrawText("// Considere o laço de repetição. \n// Defina quantas vezes ele irá se repetir.", xCodigo-20, yCodigo-30, 18, DARKGRAY);
     
-    DrawText("____", xCodigo, yCodigo, 28, GRAY);
-    DrawText(" numero = 10;", xCodigo+80, yCodigo, 28, BLACK);
+    DrawText("for (int i = 0; ______ i++) {", xCodigo, yCodigo+15, 20, corRoxo);
+    DrawText("printf(\"Ataque %d\", i + 1);", xCodigo+25, yCodigo+40, 20, GRAY);
+    DrawText("}", xCodigo, yCodigo+61, 20, GRAY);
 
     for (int i = 0; i < 4; i++) {
         if (opcoes[i].selecionada) {
-            DrawRectangle(xCodigo-2, yCodigo-2, 90, 32, (Color){230,230,230,255});
-            DrawText(opcoes[i].texto, xCodigo, yCodigo, 28, DARKBLUE);
+            DrawRectangle(xCodigo+138, yCodigo+15, 70, 20, (Color){230,230,230,255});
+            DrawText(opcoes[i].texto, xCodigo+144, yCodigo+15, 20, DARKBLUE);
         }
     }
+
+
     // desenha as caixinhas/opções
     for (int i = 0; i < 4; i++) {
         Caixinha *c = &opcoes[i];

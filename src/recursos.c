@@ -18,6 +18,7 @@ void carregarRecursos(Imagens *imagens) {
     imagens->interface[SPLASH_ARTE] = carregarImagem(SPLASH_ARTE, "./imagens/arte_splash.png");
     imagens->interface[TITULO_ARTE] = carregarImagem(TITULO_ARTE, "./imagens/arte_titulo.png");
     imagens->interface[IMAGEM_FUNDO] = carregarImagem(IMAGEM_FUNDO, "./imagens/torre.jpeg");
+    imagens->interface[FUNDO_GENERICO] = carregarImagem(FUNDO_GENERICO, "./imagens/fundo_generico.png");
 
     // imagens de cenario
     imagens->cenario[DUNGEON] = carregarImagem(DUNGEON, "./imagens/dungeon.jpeg");

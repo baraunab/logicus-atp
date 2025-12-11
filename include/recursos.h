@@ -6,6 +6,7 @@ typedef enum {
     SPLASH_ARTE,
     TITULO_ARTE,
     IMAGEM_FUNDO,
+    FUNDO_GENERICO,
     QTD_INTERFACES
     
 } Interfaces;

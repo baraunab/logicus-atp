@@ -45,37 +45,39 @@ EstadoTela telaGrimorio(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALT
 	
 	// fundo combinando	
 	ClearBackground(fundo);
-	
+
+        DrawTexture((*imagens).interface[FUNDO_GENERICO], 0, 0, WHITE);
+
 	// imagem do grimorio
 	DrawTexture((*imagens).cenario[GRIMORIO], 0, 40, WHITE);
 	
 	int estadoGuiTemporario = GuiGetState();
 	
 	GuiSetStyle(DEFAULT, BORDER_WIDTH, 0);
-    GuiSetStyle(DEFAULT, BASE_COLOR_NORMAL, 0x00000000);
-    GuiSetStyle(DEFAULT, BORDER_COLOR_NORMAL, 0x00000000);
+        GuiSetStyle(DEFAULT, BASE_COLOR_NORMAL, 0x00000000);
+        GuiSetStyle(DEFAULT, BORDER_COLOR_NORMAL, 0x00000000);
 	
 	float alturaConteudoEsquerda = 5 * 90 + 10;
 	
-	if (alturaConteudoEsquerda > paginaEsquerda.height) {
-        float movimentoScroll = GetMouseWheelMove();
-        if (verificaHoverPagina(paginaEsquerda) && movimentoScroll != 0) {
-            *deslocarScrollEsquerda += movimentoScroll * 20.0f;
-        }
+        if (alturaConteudoEsquerda > paginaEsquerda.height) {
+            float movimentoScroll = GetMouseWheelMove();
+            if (verificaHoverPagina(paginaEsquerda) && movimentoScroll != 0) {
+                *deslocarScrollEsquerda += movimentoScroll * 20.0f;
+            }
 
-        // Limita o scroll
-        if (*deslocarScrollEsquerda > 0) {
-        	*deslocarScrollEsquerda = 0;
+            // Limita o scroll
+            if (*deslocarScrollEsquerda > 0) {
+                *deslocarScrollEsquerda = 0;
+            }
+
+            float maximoScroll = paginaEsquerda.height - alturaConteudoEsquerda;
+
+            if (*deslocarScrollEsquerda < maximoScroll) { 
+                *deslocarScrollEsquerda = maximoScroll;
+            }
+        } else {
+            *deslocarScrollEsquerda = 0;
         }
-        
-        float maximoScroll = paginaEsquerda.height - alturaConteudoEsquerda;
-        
-        if (*deslocarScrollEsquerda < maximoScroll) { 
-        	*deslocarScrollEsquerda = maximoScroll;
-        }
-    } else {
-        *deslocarScrollEsquerda = 0;
-    }
 	
 	
 	// Limita o desenho da pagina 
@@ -111,33 +113,33 @@ EstadoTela telaGrimorio(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALT
 	
 	EndScissorMode();
 	
-	GuiSetStyle(BUTTON, BORDER_WIDTH, 1);
-    GuiSetStyle(BUTTON, BORDER_COLOR_NORMAL, ColorToInt(BLACK));
-    GuiSetStyle(BUTTON, BASE_COLOR_NORMAL, ColorToInt(corTransparente));
-    GuiSetStyle(BUTTON, TEXT_COLOR_NORMAL, ColorToInt(DARKPURPLE));
-    
-	
-	float alturaConteudoDireita = 5 * 60 + 10;
-	
-	if (alturaConteudoDireita > paginaDireita.height) {
-        float movimentoScroll = GetMouseWheelMove();
-        if (verificaHoverPagina(paginaDireita) && movimentoScroll != 0) {
-            *deslocarScrollDireita += movimentoScroll * 20.0f;
-        }
+        GuiSetStyle(BUTTON, BORDER_WIDTH, 1);
+        GuiSetStyle(BUTTON, BORDER_COLOR_NORMAL, ColorToInt(BLACK));
+        GuiSetStyle(BUTTON, BASE_COLOR_NORMAL, ColorToInt(corTransparente));
+        GuiSetStyle(BUTTON, TEXT_COLOR_NORMAL, ColorToInt(DARKPURPLE));
 
-        // Limita o scroll
-        if (*deslocarScrollDireita > 0) {
-        	*deslocarScrollDireita = 0;
+
+        float alturaConteudoDireita = 5 * 60 + 10;
+
+        if (alturaConteudoDireita > paginaDireita.height) {
+            float movimentoScroll = GetMouseWheelMove();
+            if (verificaHoverPagina(paginaDireita) && movimentoScroll != 0) {
+                *deslocarScrollDireita += movimentoScroll * 20.0f;
+            }
+
+            // Limita o scroll
+            if (*deslocarScrollDireita > 0) {
+                *deslocarScrollDireita = 0;
+            }
+
+            float maximoScroll = paginaDireita.height - alturaConteudoDireita;
+
+            if (*deslocarScrollDireita < maximoScroll) { 
+                *deslocarScrollDireita = maximoScroll;
+            }
+        } else {
+            *deslocarScrollDireita = 0;
         }
-        
-        float maximoScroll = paginaDireita.height - alturaConteudoDireita;
-        
-        if (*deslocarScrollDireita < maximoScroll) { 
-        	*deslocarScrollDireita = maximoScroll;
-        }
-    } else {
-        *deslocarScrollDireita = 0;
-    }
 	
 	
 	BeginScissorMode(

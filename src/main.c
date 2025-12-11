@@ -15,7 +15,6 @@
 #include "telas.h"
 #include "caixinhas.h"
 #include "save.h"
-#include "dialogo.h"
 #include "salas.h"
 #include "grimorio.h"
 // declaracao de constantes globais
