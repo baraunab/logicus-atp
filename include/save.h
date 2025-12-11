@@ -4,6 +4,8 @@
 #ifndef SAVE_H
 #define SAVE_H
 
+#include "telas.h"
+
 typedef struct {
     char nomeUsuario[64];
 
@@ -18,9 +20,8 @@ extern SaveEstado *saveEmUso;
 extern int slotAtivo;
 extern SaveEstado saveSlots[3];
 
-bool salvarEstadoDeJogo(SaveEstado *estado, int slot);
-bool carregarEstadoDeJogo(SaveEstado *estado, int slot);
-EstadoTela telaSlotsSave(Imagens *imagens);
-void inicializarSistemaDeSave(void);
+void salvarEstadoDeJogo(SaveEstado *estado, int slot);
+void carregarEstadoDeJogo(SaveEstado *estado, int slot);
+void inicializarSistemaDeSave(SaveEstado *saveSlots);
 
 #endif // SAVE_H
