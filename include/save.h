@@ -20,7 +20,7 @@ extern SaveEstado saveSlots[3];
 
 bool salvarEstadoDeJogo(SaveEstado *estado, int slot);
 bool carregarEstadoDeJogo(SaveEstado *estado, int slot);
-EstadoTela telaSlotsSave(void);
+EstadoTela telaSlotsSave(Imagens *imagens);
 void inicializarSistemaDeSave(void);
 
 #endif // SAVE_H
