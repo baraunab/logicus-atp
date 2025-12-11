@@ -366,7 +366,7 @@ EstadoTela telaBau(Imagens *imagens, int LARGURA, int ALTURA) {
                 DrawText("A chave escorrega da sua mente.", 200, 300, 30, RED);
                 DrawText("Pressione ENTER para tentar de novo.", 200, 350, 20, WHITE);
                 if (IsKeyPressed(KEY_ENTER)){
-                	return TELA_MAPA;
+                	return TELA_INPUT;
 				}
             }
             break;
@@ -394,6 +394,7 @@ EstadoTela telaLabirinto(Imagens *imagens, int LARGURA, int ALTURA) {
     static int linhaAtual = 0;
     static bool carregado = false;
     static bool dialogoConcluido = false;
+    static bool combateIniciado = false;
 
     // Dialogo
     if (!carregado) {
@@ -491,9 +492,13 @@ EstadoTela telaLabirinto(Imagens *imagens, int LARGURA, int ALTURA) {
             // Acertou
             progresso++; 
         } else {
-            // Errou
-            IniciarCombate(GOBLIN);
-            return TELA_COMBATE;
+            if (IsKeyPressed(KEY_C) && !combateIniciado) {
+        		// Inicia o combate com os dados personalizados
+       			IniciarCombate(GOBLIN); 
+        
+        		combateIniciado = true;
+        		return TELA_COMBATE;
+    		}
         }
     }
 
@@ -510,8 +515,9 @@ EstadoTela telaLabirinto(Imagens *imagens, int LARGURA, int ALTURA) {
     }
 
     // Menu
-    if (IsKeyPressed(KEY_M)) return TELA_MAPA;
-    
+    if (IsKeyPressed(KEY_M)){
+		return TELA_MAPA;
+	}
     return TELA_LABIRINTO;
 }
 
@@ -544,9 +550,9 @@ EstadoTela telaLacos(Imagens *imagens, int LARGURA, int ALTURA) {
     }
 
     // Se o dialogo acabou, inicia o combate
-    DrawText("Aperte 'I' para Iniciar o Combate!", 50, 100, 20, LIGHTGRAY);
+    DrawText("Aperte 'C' para Iniciar o Combate!", 50, 100, 20, LIGHTGRAY);
     
-    if (IsKeyPressed(KEY_I) && !combateIniciado) {
+    if (IsKeyPressed(KEY_C) && !combateIniciado) {
         // Inicia o combate com os dados personalizados
         IniciarCombate(LORD_C); 
         
