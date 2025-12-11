@@ -5,9 +5,18 @@
 typedef enum {
     SPLASH_ARTE,
     TITULO_ARTE,
+
     IMAGEM_FUNDO,
-    QTD_INTERFACES
-    
+    SAVES_FUNDO,
+
+    BOTAO_NORMAL,
+    BOTAO_FOCADO,
+    BOTAO_PRESSIONADO,
+    BOTAO_APAGAR_SAVE,
+    BOTAO_APAGAR_SAVE_FOCADO,
+    BOTAO_APAGAR_SAVE_INATIVO,
+
+    QTD_INTERFACES   
 } Interfaces;
 
 // identificadores de artes de cenarios

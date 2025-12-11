@@ -1,6 +1,13 @@
 #ifndef DIALOGO_H
 #define DIALOGO_H
 
+#define CARAC_SEG 30.0f
+#define TEMPO_CARAC (1.0 / CARAC_SEG)
+
+static int caracteresVisiveis = 0;
+static float contadorTempo = 0.0f;
+static bool animacaoConcluida = false;
+
 // estrutura para leitura de dialogos e exibição na tela
 typedef struct {
     char nome[256];

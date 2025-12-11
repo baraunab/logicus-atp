@@ -62,7 +62,7 @@ bool mudarTela(EstadoTela *telaAtual, Imagens *imagens, int LARGURA, int ALTURA)
             break;
 
          case TELA_SAVES:
-            *telaAtual = telaSlotsSave();
+            *telaAtual = telaSlotsSave(imagens);
             break;
 
          case TELA_CAIXINHAS:

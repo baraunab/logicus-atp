@@ -25,21 +25,15 @@ typedef struct {
 int slotAtivo = -1;
 
 SaveEstado saveSlots[3];
-SaveEstado *saveEmUso = &saveSlots[0];
-
-char *nomesArquivosSave[3] = {
-    "slot1",
-    "slot2",
-    "slot3"
-};
+SaveEstado *saveEmUso = NULL;
 
 void salvarEstadoDeJogo(SaveEstado *estado, int slot) {
-    char arquivo[256] = "./saves/";
-    strcat(arquivo, nomesArquivosSave[slot]);
+    char arquivo[256];
+    snprintf(arquivo, 256, "saves/slot%d", slot);
 
     FILE *f = fopen(arquivo, "wb");
     
-    printf("LOG: escrevendo save: %s\n", arquivo);
+    printf("LOG: escrevendo em save: %s\n", arquivo);
 
     // validacao se arquivo pode ser encontrado/aberto
     if (f == NULL) {
@@ -47,9 +41,7 @@ void salvarEstadoDeJogo(SaveEstado *estado, int slot) {
         exit(1);
     }
 
-    estado->ativo = true;
-    
-    // ler dados e armazenar no estado passado para a funcao
+    // ler estado passado para a funcao e armazenar em arquivo binario
     fwrite(estado, sizeof(SaveEstado), 1, f);
 
     // fechar arquivo
@@ -57,21 +49,19 @@ void salvarEstadoDeJogo(SaveEstado *estado, int slot) {
 }
 
 void carregarEstadoDeJogo(SaveEstado *estado, int slot) {
-    char arquivo[256] = "./saves/";
-    strcat(arquivo, nomesArquivosSave[slot]);
+    char arquivo[256];
+    snprintf(arquivo, 256, "saves/slot%d", slot);
+
+    printf("LOG: carregando save: %s\n", arquivo);
 
     // abrir arquivo binario para leitura
     FILE *f = fopen(arquivo, "rb");
 
-    printf("LOG: carregando save: %s\n", arquivo);
-    // validacao se arquivo pode ser encontrado/aberto
     if (f == NULL) {
-        fprintf(stderr, "ERRO: impossivel abrir arquivo: %s\n", arquivo);
-        f = fopen(arquivo, "wb");
         fclose(f);
         return;
     }
-    
+
     // ler dados e armazenar no estado passado para a funcao
     fread(estado, sizeof(SaveEstado), 1, f);
     
@@ -79,55 +69,79 @@ void carregarEstadoDeJogo(SaveEstado *estado, int slot) {
     fclose(f);
 }
 
-EstadoTela telaSlotsSave() {
+void inicializarSistemaDeSave(void) {
+    for (int i = 0; i < 3; ++i) {
+        carregarEstadoDeJogo(&saveSlots[i], i);
+    }
+}
+
+EstadoTela telaSlotsSave(Imagens *imagens) {
     Rectangle slots[3];
 
-    //Rectangle fundoDeTela = { 0, ALTURA * 0.04, 800, 480 };
-    DrawRectangle(0, 0, 800, 480, PURPLE);
-    //ClearBackground(GetColor(GuiGetStyle(DEFAULT, 20)));
+    DrawTexture((*imagens).interface[SAVES_FUNDO], 0, 0, WHITE);
 
     int espacamento = 8;
 
-    int posicaoX = 16, posicaoY = 16;
-    int alturaBotao = 64, larguraBotao = 256;
+    int alturaBotao = 64, larguraBotao = 256 * 2;
+    int posicaoX = (GetScreenWidth() / 2) - ((larguraBotao + alturaBotao) / 2);
+    int posicaoY = (GetScreenHeight() / 2) - (3 * alturaBotao) / 2;
 
-    char *nomeBotoes[3] = {
-        "Slot 1",
-        "Slot 2",
-        "Slot 3"
-    };
+    int tamanhoFonte = 20;
 
     for (int i = 0; i < 3; ++i) {
         slots[i] = (Rectangle) { posicaoX, posicaoY + ((alturaBotao + espacamento) * i), larguraBotao, alturaBotao };
         Rectangle apagar = (Rectangle) { posicaoX + larguraBotao + espacamento, posicaoY + ((alturaBotao + espacamento) * i), alturaBotao, alturaBotao };
         GuiSetIconScale(2);
-        if (GuiButton(apagar, "#143#")) {
-            memset(&saveSlots[i], 0, sizeof(SaveEstado));
-            salvarEstadoDeJogo(&saveSlots[i], i);
-            printf("LOG: Apagado save slot %d\n", i + 1);
-        }
-        if (GuiButton(slots[i], nomeBotoes[i])) { 
-            slotAtivo = i;
-            printf("LOG: Slot %d selecionado\n", i + 1);
 
-            saveEmUso = &saveSlots[i];
+        if (saveSlots[i].ativo) {
+            DrawTexture((*imagens).interface[BOTAO_APAGAR_SAVE], apagar.x, apagar.y, WHITE);
+        } else {
+            DrawTexture((*imagens).interface[BOTAO_APAGAR_SAVE_INATIVO], apagar.x, apagar.y, WHITE);
+        }
+
+        if (CheckCollisionPointRec(GetMousePosition(), apagar) && saveSlots[i].ativo) {
+            DrawTexture((*imagens).interface[BOTAO_APAGAR_SAVE_FOCADO], apagar.x, apagar.y, WHITE);
             
-            if (saveEmUso->ativo) {
-                carregarEstadoDeJogo(saveEmUso, slotAtivo);
+            if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON)) {
+                memset(&saveSlots[i], 0, sizeof(SaveEstado));
+                salvarEstadoDeJogo(&saveSlots[i], i);
+
+                printf("LOG: apagado save slot %d\n", i);
+            }
+        }
+
+        char texto[256];
+        if (saveSlots[i].ativo) {
+            strcpy(texto, "Continuar jogando...");
+        } else {
+            strcpy(texto, "Novo jogo!");
+        }
+        
+        DrawTexture((*imagens).interface[BOTAO_NORMAL], slots[i].x, slots[i].y, WHITE);
+        DrawText(texto, slots[i].x + (alturaBotao / 2), slots[i].y + (alturaBotao / 2) - 8, tamanhoFonte, BLACK);
+        
+        if (CheckCollisionPointRec(GetMousePosition(), slots[i])) {
+            DrawTexture((*imagens).interface[BOTAO_FOCADO], slots[i].x, slots[i].y, WHITE);
+            DrawText(texto, slots[i].x + (alturaBotao / 2), slots[i].y + (alturaBotao / 2) - 8, tamanhoFonte, WHITE);
+            
+            if (IsMouseButtonDown(MOUSE_LEFT_BUTTON)) {
+                DrawTexture((*imagens).interface[BOTAO_PRESSIONADO], slots[i].x, slots[i].y, WHITE);
+                DrawText(texto, slots[i].x + (alturaBotao / 2), slots[i].y + (alturaBotao / 2) - 8, tamanhoFonte, PURPLE);
             }
             
-            printf("saveEmUso->ativo = %d\n", saveEmUso->ativo);
+            if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON)) {
+                printf("LOG: selecionado slot %d\n", i);
 
-            return TELA_JOGO;
+                slotAtivo = i;
+                saveEmUso = &saveSlots[i];
+                saveEmUso->ativo = true;
+
+                printf("saveEmUso->ativo = %d\n", saveEmUso->ativo);
+
+                return TELA_JOGO;
+            }
         }
     }
 
     return TELA_SAVES;
-}
-
-void inicializarSistemaDeSave(void) {
-    for (int i = 0; i < 3; ++i) {
-        carregarEstadoDeJogo(&saveSlots[i], i);
-        printf("LOG: Slot %d inicializado!\n", i + 1);
-    }
 }

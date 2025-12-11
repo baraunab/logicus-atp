@@ -21,6 +21,6 @@ echo "Baixando RayLib..."
 git clone --depth=1 https://github.com/raysan5/raygui ./bibliotecas/raygui
 
 cd bibliotecas/raylib/src
-make
+make -j4
 
 echo "Configuracao finalizada!!"

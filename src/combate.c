@@ -5,7 +5,7 @@
 #include "raygui.h"
 #include "combate.h"
 
-// --- CORES ---
+// Cores
 #define COR_HP_ALTO     CLITERAL(Color){ 112, 248, 168, 255 }
 #define COR_HP_MEDIO    CLITERAL(Color){ 248, 224, 56, 255 }
 #define COR_HP_BAIXO    CLITERAL(Color){ 248, 88, 56, 255 }
