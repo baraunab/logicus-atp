@@ -49,7 +49,7 @@ EstadoTela telaGrimorio(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALT
         DrawTexture((*imagens).interface[FUNDO_GENERICO], 0, 0, WHITE);
 
 	// imagem do grimorio
-	DrawTexture((*imagens).cenario[GRIMORIO], 0, 40, WHITE);
+	DrawTexture((*imagens).interface[GRIMORIO], 0, 40, WHITE);
 	
 	int estadoGuiTemporario = GuiGetState();
 	

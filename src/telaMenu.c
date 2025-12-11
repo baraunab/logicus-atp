@@ -60,7 +60,7 @@ EstadoTela telaMenu(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA)
         // mudar cor do texto ao passar o mouse por cima
         corStrJogar = corStrDestaque;
         
-        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+        if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON)) {
             return TELA_SAVES;
         }
 

@@ -5,10 +5,18 @@
 typedef enum {
     SPLASH_ARTE,
     TITULO_ARTE,
+    GRIMORIO,
     IMAGEM_FUNDO,
     FUNDO_GENERICO,
-    QTD_INTERFACES
-    
+    SAVES_FUNDO,
+    BOTAO_NORMAL,
+    BOTAO_FOCADO,
+    BOTAO_PRESSIONADO,
+    BOTAO_APAGAR_SAVE,
+    BOTAO_APAGAR_SAVE_FOCADO,
+    BOTAO_APAGAR_SAVE_INATIVO,
+    QTD_INTERFACES   
+
 } Interfaces;
 
 // identificadores de artes de cenarios
@@ -16,7 +24,6 @@ typedef enum {
     // TODO: desenhar e carregar cenarios
     DUNGEON,
     TORRE,
-    GRIMORIO,
     QTD_CENARIOS
 } Cenarios;
 

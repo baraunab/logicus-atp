@@ -8,7 +8,6 @@
 #include "telas.h"
 #include "caixinhas.h"
 #include "grimorio.h"
-#include "desafioCaixinhas.h"
 
 #define LARGURA 800
 #define ALTURA  480
@@ -17,7 +16,7 @@ Color corRoxo = (Color){ 65, 22, 94, 255 };
 Color corRoxoEscuro = (Color){ 42, 0, 70, 255 };
 
 // estrutura para representar cada caixinha/opção
-EstadoTela desafioCaixinhas1(Imagens *imagens) {
+EstadoTela desafioCaixinhas1(void) {
 	
     Color corRosa = (Color){ 153, 97, 137, 255 };
     static int iniciado = 0;
@@ -140,7 +139,7 @@ EstadoTela desafioCaixinhas1(Imagens *imagens) {
     return TELA_DESAFIO1;
 }
 
-EstadoTela desafioCaixinhas2(Imagens *imagens) {
+EstadoTela desafioCaixinhas2() {
 	
     Color corRosa = (Color){ 153, 97, 137, 255 };
     static int iniciado = 0;
@@ -260,7 +259,7 @@ EstadoTela desafioCaixinhas2(Imagens *imagens) {
     return TELA_DESAFIO2;
 }
 
-EstadoTela desafioCaixinhas3(Imagens *imagens) {
+EstadoTela desafioCaixinhas3() {
 
     Color corRosa = (Color){ 153, 97, 137, 255 };
 
@@ -382,7 +381,7 @@ EstadoTela desafioCaixinhas3(Imagens *imagens) {
     return TELA_DESAFIO3;
 }
 
-EstadoTela desafioCaixinhas4(Imagens *imagens) {
+EstadoTela desafioCaixinhas4() {
 	
     Color corRosa = (Color){ 153, 97, 137, 255 };
     
@@ -509,7 +508,7 @@ EstadoTela desafioCaixinhas4(Imagens *imagens) {
     return TELA_DESAFIO4;
 }
 
-EstadoTela desafioCaixinhas5(Imagens *imagens) {
+EstadoTela desafioCaixinhas5() {
     	
     Color corRosa = (Color){ 153, 97, 137, 255 };
     
