@@ -2,6 +2,7 @@
 #define TELAS_H
 
 #include "recursos.h"
+#include "save.h"
 
 typedef enum {
     TELA_INICIAL = 0,
@@ -32,6 +33,7 @@ EstadoTela telaMenu(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA)
 EstadoTela telaJogo(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA);
 EstadoTela telaMapa(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA);
 EstadoTela telaInput(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA);
+EstadoTela telaSlotsSave(Imagens *imagens);
 
 //Protótipo de fases
 EstadoTela telaEntrada(Imagens *imagens, int LARGURA, int ALTURA);

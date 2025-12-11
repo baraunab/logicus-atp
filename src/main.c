@@ -26,14 +26,14 @@
 #define ALTURA 480
 
 // declaracao de variaveis globais
-// ...
 
 // vetor com a quantidade de slots de save acessiveis para o usuario
 
 int main(void) {
-    // carrega saves de jogo existentes
-    inicializarSistemaDeSave();
 
+    // carrega saves de jogo existentes
+    inicializarSistemaDeSave(saveSlots);
+ 
     // aloca estaticamente memoria para recursos de imagem
     Imagens imagens = {0};
     

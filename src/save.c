@@ -13,19 +13,10 @@
 #define LARGURA 480
 
 // estrutura com campos de informacao de um save especifico
-typedef struct {
-    char nomeUsuario[64];
-
-    int pontuacao;
-    EstadoTela fase;
-    int dialogoAtual;
-    bool ativo;
-} SaveEstado;
 
 int slotAtivo = -1;
-
+SaveEstado *saveEmUso;
 SaveEstado saveSlots[3];
-SaveEstado *saveEmUso = NULL;
 
 void salvarEstadoDeJogo(SaveEstado *estado, int slot) {
     char arquivo[256];
@@ -53,7 +44,7 @@ void carregarEstadoDeJogo(SaveEstado *estado, int slot) {
     snprintf(arquivo, 256, "saves/slot%d", slot);
 
     printf("LOG: carregando save: %s\n", arquivo);
-
+    
     // abrir arquivo binario para leitura
     FILE *f = fopen(arquivo, "rb");
 
@@ -69,9 +60,19 @@ void carregarEstadoDeJogo(SaveEstado *estado, int slot) {
     fclose(f);
 }
 
-void inicializarSistemaDeSave(void) {
+void inicializarSistemaDeSave(SaveEstado *saveSlots) {
     for (int i = 0; i < 3; ++i) {
-        carregarEstadoDeJogo(&saveSlots[i], i);
+        char nome[32];
+        snprintf(nome, 32, "saves/slot%d", i);
+
+        FILE *f = fopen(nome, "rb");
+        if (f == NULL) {
+            FILE *fp = fopen("nome", "wb");
+            fclose(fp);
+            continue;
+        }
+
+        fread(&saveSlots[i], sizeof(SaveEstado), 1, f);
     }
 }
 
