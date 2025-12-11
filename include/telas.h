@@ -20,7 +20,16 @@ typedef enum {
     TELA_COMBATE,
     TELA_INPUT,
     TELA_SAVES,
+    TELA_SALA,
+  
+    TELA_DESAFIO1,
+    TELA_DESAFIO2,
+    TELA_DESAFIO3,
+    TELA_DESAFIO4,
+    TELA_DESAFIO5,
+  
     TELA_CAIXINHAS,
+    TELA_GRIMORIO,
     SAIR
 } EstadoTela;
 
@@ -34,6 +43,13 @@ EstadoTela telaJogo(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA)
 EstadoTela telaMapa(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA);
 EstadoTela telaInput(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA);
 EstadoTela telaSlotsSave(Imagens *imagens);
+EstadoTela telaGrimorio(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA);
+
+EstadoTela desafioCaixinhas1(void);
+EstadoTela desafioCaixinhas2(void);
+EstadoTela desafioCaixinhas3(void);
+EstadoTela desafioCaixinhas4(void);
+EstadoTela desafioCaixinhas5(void);
 
 //Protótipo de fases
 EstadoTela telaEntrada(Imagens *imagens, int LARGURA, int ALTURA);

@@ -195,5 +195,10 @@ EstadoTela telaJogo(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA)
         return TELA_MAPA; // <--- ISSO É O QUE FAZ A TROCA DE TELA
     }
     
+    if (IsKeyPressed(KEY_I)) {
+    	printf("Abrindo o grimorio...");
+    	return TELA_GRIMORIO;
+    }
+
      return *tela;
 } 
