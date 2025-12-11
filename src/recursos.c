@@ -19,6 +19,9 @@ void carregarRecursos(Imagens *imagens) {
     imagens->interface[TITULO_ARTE] = carregarImagem(TITULO_ARTE, "./imagens/arte_titulo.png");
 
     imagens->interface[IMAGEM_FUNDO] = carregarImagem(IMAGEM_FUNDO, "./imagens/torre.jpeg");
+
+    imagens->interface[FUNDO_GENERICO] = carregarImagem(FUNDO_GENERICO, "./imagens/fundo_generico.png");
+
     imagens->interface[SAVES_FUNDO] = carregarImagem(SAVES_FUNDO, "./imagens/saves_fundo.png");
 
     imagens->interface[BOTAO_NORMAL] = carregarImagem(BOTAO_NORMAL, "./imagens/botao_normal.png");
@@ -28,6 +31,8 @@ void carregarRecursos(Imagens *imagens) {
     imagens->interface[BOTAO_APAGAR_SAVE] = carregarImagem(BOTAO_APAGAR_SAVE, "./imagens/apagar_save.png");
     imagens->interface[BOTAO_APAGAR_SAVE_FOCADO] = carregarImagem(BOTAO_APAGAR_SAVE_FOCADO, "./imagens/apagar_save_focado.png");
     imagens->interface[BOTAO_APAGAR_SAVE_INATIVO] = carregarImagem(BOTAO_APAGAR_SAVE_INATIVO, "./imagens/apagar_save_inativo.png");
+
+    imagens->interface[GRIMORIO] = carregarImagem(GRIMORIO, "./imagens/grimorio.png");
 
     // imagens de cenario
     imagens->cenario[DUNGEON] = carregarImagem(DUNGEON, "./imagens/dungeon.jpeg");

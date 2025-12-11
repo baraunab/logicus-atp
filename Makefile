@@ -14,7 +14,7 @@ RL_LDD = $(PWD)/bibliotecas/raylib/src
 RL_INC = ./bibliotecas/raylib/src
 RG_INC = ./bibliotecas/raygui/src
 
-OBJS = telaSala.o caixinhas.o recursos.o save.o dialogo.o main.o mudarTela.o telaInicial.o telaMenu.o telaJogo.o telaInput.o salas.o
+OBJS = telaSala.o caixinhas.o recursos.o save.o dialogo.o main.o mudarTela.o telaInicial.o telaMenu.o telaJogo.o telaInput.o salas.o desafioCaixinhas.o telaGrimorio.o
 
 CPPFLAGS = -I$(RL_INC) -I$(RG_INC) -I$(INCLUDE)
 
@@ -59,6 +59,12 @@ telaSala.o: ./src/telaSala.c
 caixinhas.o: ./src/caixinhas.c
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c ./src/caixinhas.c
 
+desafioCaixinhas.o: ./src/desafioCaixinhas.c
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c ./src/desafioCaixinhas.c
+
+
+telaGrimorio.o: ./src/telaGrimorio.c
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c ./src/telaGrimorio.c
 clean:
 	@rm -f $(OBJS) ./build/logicus
 	@echo "limpeza feita!"
