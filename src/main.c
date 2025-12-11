@@ -52,9 +52,16 @@ int main(void) {
     
     // carrega recursos de imagem do jogo
     carregarRecursos(&imagens);
-	
+   
+    InitAudioDevice();
+    Music musicaFundo = LoadMusicStream("./audios/ambiente.mp3");
+        
+    PlayMusicStream(musicaFundo);
+    
     // inicia game loop para desenhar na janela
     while (!WindowShouldClose()) {
+        
+        UpdateMusicStream(musicaFundo);
 
         BeginDrawing();
             // limpa cor de fundo para proxima iteracao
@@ -71,6 +78,9 @@ int main(void) {
     
     // descarrega recursos de imagem alocadas pelo rayGUI
     descarregarRecursos(&imagens);
+    
+    UnloadMusicStream(musicaFundo);
+    CloseAudioDevice();
 
     // finaliza janela
     CloseWindow();
