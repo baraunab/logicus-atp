@@ -156,11 +156,11 @@ EstadoTela telaGrimorio(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALT
 		};
 		
 		char rotulo[5][20] = {
-			"Desafio 1",
-			"Desafio 2",
-			"Desafio 3",
-			"Desafio 4",
-			"Desafio 5"
+			"Biblioteca",
+			"Variável",
+			"Entrada",
+			"Condicional",
+			"Laço"
 		};
 
         if (GuiButton(areaBotao, rotulo[i]))  {

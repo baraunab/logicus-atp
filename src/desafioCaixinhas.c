@@ -38,22 +38,22 @@ EstadoTela desafioCaixinhas1(void) {
 
         opcoes[0] = (Caixinha){
             .area = (Rectangle){ xInicial + 0*(larguraCaixa+espacamento), yCaixas, larguraCaixa, alturaCaixa },
-            .texto = "<stdlib>", .correta = 0, .selecionada = 0
+            .texto = "<stdlib.h>", .correta = 0, .selecionada = 0
         };
 
         opcoes[1] = (Caixinha){
             .area = (Rectangle){ xInicial + 1*(larguraCaixa+espacamento), yCaixas, larguraCaixa, alturaCaixa },
-            .texto = "<stdio>", .correta = 1, .selecionada = 0
+            .texto = "<stdio.h>", .correta = 1, .selecionada = 0
         };
 
         opcoes[2] = (Caixinha){
             .area = (Rectangle){ xInicial + 2*(larguraCaixa+espacamento), yCaixas, larguraCaixa, alturaCaixa },
-            .texto = "<string>", .correta = 0, .selecionada = 0
+            .texto = "<string.h>", .correta = 0, .selecionada = 0
         };
 
         opcoes[3] = (Caixinha){
             .area = (Rectangle){ xInicial + 3*(larguraCaixa+espacamento), yCaixas, larguraCaixa, alturaCaixa },
-            .texto = "<stdbool>", .correta = 0, .selecionada = 0
+            .texto = "<stdbool.h>", .correta = 0, .selecionada = 0
         };
 
         botaoVerificar = (Rectangle){ (LARGURA-200)/2.0f, 380, 200, 40 };
@@ -87,13 +87,13 @@ EstadoTela desafioCaixinhas1(void) {
     // linha de código com espaço para a caixinha
     DrawText("// chame a biblioteca correta para entrada e saida de dados", xCodigo, yCodigo-30, 18, DARKGRAY);
     
-    DrawText("#include", xCodigo, yCodigo, 28, GRAY);
-    DrawText(" <____>", xCodigo+120, yCodigo, 28, BLACK);
+    DrawText("#include", xCodigo, yCodigo, 28, corRoxo);
+    DrawText(" <____>", xCodigo+120, yCodigo, 28, corRoxo);
 
     for (int i = 0; i < 4; i++) {
         if (opcoes[i].selecionada) {
             DrawRectangle(xCodigo+120, yCodigo-2, 95, 32, (Color){230,230,230,255});
-            DrawText(opcoes[i].texto, xCodigo+120, yCodigo, 28, DARKBLUE);
+            DrawText(opcoes[i].texto, xCodigo+120, yCodigo, 28, DARKPURPLE);
         }
     }
     // desenha as caixinhas/opções
@@ -208,13 +208,13 @@ EstadoTela desafioCaixinhas2() {
     // linha de código com espaço para a caixinha
     DrawText("// declare uma variável de caracteres", xCodigo, yCodigo-30, 18, DARKGRAY);
     
-    DrawText("char ", xCodigo, yCodigo, 28, GRAY);
-    DrawText("  _____", xCodigo+60, yCodigo, 28, BLACK);
+    DrawText("char ", xCodigo, yCodigo, 28, corRoxo);
+    DrawText("  _____", xCodigo+60, yCodigo, 28, corRoxo);
 
     for (int i = 0; i < 4; i++) {
         if (opcoes[i].selecionada) {
             DrawRectangle(xCodigo+78, yCodigo-2, 95, 32, (Color){230,230,230,255});
-            DrawText(opcoes[i].texto, xCodigo+78, yCodigo, 28, DARKBLUE);
+            DrawText(opcoes[i].texto, xCodigo+78, yCodigo, 28, DARKPURPLE);
         }
     }
     // desenha as caixinhas/opções
@@ -292,7 +292,7 @@ EstadoTela desafioCaixinhas3() {
 
         opcoes[2] = (Caixinha){
             .area = (Rectangle){ xInicial + 2*(larguraCaixa+espacamento), yCaixas, larguraCaixa, alturaCaixa },
-            .texto = "\%lf", .correta = 0, .selecionada = 0
+            .texto = "\%p", .correta = 0, .selecionada = 0
         };
 
         opcoes[3] = (Caixinha){
@@ -331,12 +331,12 @@ EstadoTela desafioCaixinhas3() {
     
     DrawText("float poderDasSombras = 1000;", xCodigo, yCodigo+15, 20, corRoxo);
 
-    DrawText("printf(\"Poder Sombrio: ___ \", poderDasSombras)", xCodigo, yCodigo+40, 20, GRAY);
+    DrawText("printf(\"Poder Sombrio: ___ \", poderDasSombras)", xCodigo, yCodigo+40, 20, corRoxo);
 
     for (int i = 0; i < 4; i++) {
         if (opcoes[i].selecionada) {
             DrawRectangle(xCodigo+238, yCodigo+40, 40, 32, (Color){230,230,230,255});
-            DrawText(opcoes[i].texto, xCodigo+242, yCodigo+40, 20, DARKBLUE);
+            DrawText(opcoes[i].texto, xCodigo+242, yCodigo+40, 20, DARKPURPLE);
         }
     }
     // desenha as caixinhas/opções
@@ -414,7 +414,7 @@ EstadoTela desafioCaixinhas4() {
 
         opcoes[2] = (Caixinha){
             .area = (Rectangle){ xInicial + 2*(larguraCaixa+espacamento), yCaixas, larguraCaixa, alturaCaixa },
-            .texto = "estado;", .correta = 1, .selecionada = 0
+            .texto = "false;", .correta = 1, .selecionada = 0
         };
 
         opcoes[3] = (Caixinha){
@@ -452,16 +452,16 @@ EstadoTela desafioCaixinhas4() {
     // linha de código com espaço para a caixinha
     DrawText("// Considere a condição. \n// Retorne o variavel correta.", xCodigo-20, yCodigo-30, 18, DARKGRAY);
     
-    DrawText("char estado[5] = \"Morto\";", xCodigo, yCodigo+15, 20, corRoxo);
+    DrawText("bool estadoVivo = true;", xCodigo, yCodigo+15, 20, corRoxo);
 
-    DrawText("if (vida == 0) {", xCodigo, yCodigo+40, 20, GRAY);
-    DrawText("return  ____ ", xCodigo+25, yCodigo+61, 20, GRAY);
-    DrawText("}", xCodigo, yCodigo+81, 20, GRAY);
+    DrawText("if (vida == 0) {", xCodigo, yCodigo+40, 20, corRoxo);
+    DrawText("return  ____ ", xCodigo+25, yCodigo+61, 20, corRoxo);
+    DrawText("}", xCodigo, yCodigo+81, 20, corRoxo);
 
     for (int i = 0; i < 4; i++) {
         if (opcoes[i].selecionada) {
             DrawRectangle(xCodigo+104, yCodigo+61, 55, 32, (Color){230,230,230,255});
-            DrawText(opcoes[i].texto, xCodigo+104, yCodigo+61, 20, DARKBLUE);
+            DrawText(opcoes[i].texto, xCodigo+104, yCodigo+61, 20, DARKPURPLE);
         }
     }
 
@@ -578,13 +578,13 @@ EstadoTela desafioCaixinhas5() {
     DrawText("// Considere o laço de repetição. \n// Defina quantas vezes ele irá se repetir.", xCodigo-20, yCodigo-30, 18, DARKGRAY);
     
     DrawText("for (int i = 0; ______ i++) {", xCodigo, yCodigo+15, 20, corRoxo);
-    DrawText("printf(\"Ataque %d\", i + 1);", xCodigo+25, yCodigo+40, 20, GRAY);
-    DrawText("}", xCodigo, yCodigo+61, 20, GRAY);
+    DrawText("printf(\"Ataque %d\", i + 1);", xCodigo+25, yCodigo+40, 20, corRoxo);
+    DrawText("}", xCodigo, yCodigo+61, 20, corRoxo);
 
     for (int i = 0; i < 4; i++) {
         if (opcoes[i].selecionada) {
             DrawRectangle(xCodigo+138, yCodigo+15, 70, 20, (Color){230,230,230,255});
-            DrawText(opcoes[i].texto, xCodigo+144, yCodigo+15, 20, DARKBLUE);
+            DrawText(opcoes[i].texto, xCodigo+144, yCodigo+15, 20, DARKPURPLE);
         }
     }
 
