@@ -1,0 +1,20 @@
+Becky|(Então esse é o aposento de Lord C)
+Becky|(Vejo que ele já me aguarda aqui)
+Lord C|Finalmente estou cara a cara...
+Lord C|Com a garotinha que encontrou o Grimorio do Héroi
+Lord C|Meu antigo arqui-inimigo
+Lord C|Mas devo dizer que estou um pouco decepcionado
+Lord C|Eu esperava mais de você
+Lord C|Sua aura não impressiona em nada
+Becky|O Herói me advertiu de suas táticas...
+Becky|Você não vai conseguir me desestabilizar
+Narrador|Ao citar o herói Becky notou algo
+Narrador|Uma mudança na expressão de Lord C
+Narrador|Bem como os fragmentos de memória do herói
+Narrador|Demonstraram que aconteceria
+Narrador|Era o momento perfeito...
+Narrador|Para sua provocação final!
+Becky|Me enfrente sem truques psicológicos baratos Lord C...
+Becky|Não... Caelum Syntax!
+Becky|Eu vingarei seu irmão
+Becky|O Antigo Herói, Ravus Syntax!

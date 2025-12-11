@@ -16,7 +16,7 @@ typedef enum {
     TELA_LABIRINTO,
     TELA_LACOS,
     //Fim das fases
-
+    TELA_COMBATE,
     TELA_INPUT,
     TELA_SAVES,
     TELA_CAIXINHAS,

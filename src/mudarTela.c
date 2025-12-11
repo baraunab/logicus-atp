@@ -8,6 +8,7 @@
 #include "save.h"
 #include "telaSala.h"
 #include "caixinhas.h"
+#include "combate.h"
 
 // função que muda de tela ativamente
 bool mudarTela(EstadoTela *telaAtual, Imagens *imagens, int LARGURA, int ALTURA)
@@ -51,7 +52,11 @@ bool mudarTela(EstadoTela *telaAtual, Imagens *imagens, int LARGURA, int ALTURA)
             *telaAtual = telaLacos(imagens, LARGURA, ALTURA);
             break;
         //Fim das novas fases
-
+		
+		case TELA_COMBATE:
+			*telaAtual = AtualizarCombate(imagens, LARGURA, ALTURA);
+			break;
+			
         case TELA_INPUT:
             *telaAtual = telaInput(telaAtual, imagens, LARGURA, ALTURA);
             break;
