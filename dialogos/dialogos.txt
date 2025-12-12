@@ -8,4 +8,7 @@ Narrador Misterioso|Salvamos o jogo na opção acima: 'Salvar'
 Narrador Misterioso|E voltamos para esse ponto!
 Narrador Arrogante|Pressione 'M' para abrir o mapa de fases
 Narrador Arrogante|Cada fase terá desafios referentes aos conteúdos
-O Narrador|A partir daqui, vamos para as próximas funcionalidades!!
+O Narrador|Pressione 'I' para abrir o grimório do herói
+O Narrador|Ele contém informações importantes
+O Narrador|Agora, vamos começar nossa aventura!
+

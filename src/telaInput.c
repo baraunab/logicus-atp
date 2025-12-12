@@ -11,7 +11,7 @@
 bool UltimoInputFoiSucesso = false;
     // maximo de caracteres por linha com tamanho de fonte 20 é de 68 caracteres
     const char *strEnunciado = "A definir";
-    char resposta [256] = "Digite aqui sua resposta.";
+    char resposta [256] = "digite aqui sua resposta";
     const char *respostaCorreta = "resposta";
 	
 	EstadoTela destinoSucesso = TELA_MENU;

@@ -630,3 +630,128 @@ EstadoTela desafioCaixinhas5() {
 	
     return TELA_DESAFIO5;
 }
+
+// desafioCaixinhas
+EstadoTela desafioCaixinhasS2() {
+	
+    Color corRosa = (Color){ 153, 97, 137, 255 };
+    
+    static int iniciado = 0;
+    static Caixinha opcoes[4];
+    static Rectangle botaoVerificar;
+    static const char *mensagem = "";
+    Color corMensagem = corRosa;
+
+    static float yCaixas = 320;
+    static float larguraCaixa = 150;
+    static float alturaCaixa = 40;
+    static float espacamento = 20;
+    static float xInicial = 0;
+// inicialização (executa apenas uma vez)( não é looping)
+    if (!iniciado) {
+	    
+        float totalLargura = 4*larguraCaixa + 3*espacamento;
+        xInicial = (LARGURA - totalLargura)/2.0f;
+
+        opcoes[0] = (Caixinha){
+            .area = (Rectangle){ xInicial + 0*(larguraCaixa+espacamento), yCaixas, larguraCaixa, alturaCaixa },
+            .texto = "float", .correta = 0, .selecionada = 0
+        };
+
+        opcoes[1] = (Caixinha){
+            .area = (Rectangle){ xInicial + 1*(larguraCaixa+espacamento), yCaixas, larguraCaixa, alturaCaixa },
+            .texto = "int", .correta = 1, .selecionada = 0
+        };
+
+        opcoes[2] = (Caixinha){
+            .area = (Rectangle){ xInicial + 2*(larguraCaixa+espacamento), yCaixas, larguraCaixa, alturaCaixa },
+            .texto = "false", .correta = 0, .selecionada = 0
+        };
+
+        opcoes[3] = (Caixinha){
+            .area = (Rectangle){ xInicial + 3*(larguraCaixa+espacamento), yCaixas, larguraCaixa, alturaCaixa },
+            .texto = "for", .correta = 0, .selecionada = 0
+        };
+
+        botaoVerificar = (Rectangle){ (LARGURA-200)/2.0f, 380, 200, 40 };
+        iniciado = 1;
+    }
+
+    // essa parte aqui é executada toda vez (looping)
+// essse ismouse é para clicar na caixa
+    if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+        Vector2 mouse = GetMousePosition();
+        for (int i = 0; i < 4; i++) {
+            if (CheckCollisionPointRec(mouse, opcoes[i].area)) {
+                for (int j = 0; j < 4; j++) opcoes[j].selecionada = (j == i);
+            }
+        }
+    }
+
+    ClearBackground(corRoxo);
+
+    // -------- DRAW (só desenha; a main já abriu o frame) --------
+
+    Rectangle caixaCodigo = { 120, 120, 560, 150 };
+    DrawRectangleRec(caixaCodigo, (Color){230,230,230,255});
+    DrawRectangleLinesEx(caixaCodigo, 2, DARKGRAY);
+
+    int xCodigo = 150;
+    int yCodigo = 160;
+    // linha de código com espaço para a caixinha
+    DrawText("// Determine o tipo das variáveis a seguir.", xCodigo-20, yCodigo-30, 18, DARKGRAY);
+    
+    DrawText("main () {", xCodigo, yCodigo+15, 20, corRoxo);
+
+    DrawText("__ a = 5, b = 7;", xCodigo+25, yCodigo+40, 20, corRoxo);
+    DrawText("}", xCodigo, yCodigo+61, 20, corRoxo);
+
+    for (int i = 0; i < 4; i++) {
+        if (opcoes[i].selecionada) {
+            DrawRectangle(xCodigo+25, yCodigo+40, 55, 32, (Color){230,230,230,255});
+            DrawText(opcoes[i].texto, xCodigo+22, yCodigo+40, 20, DARKPURPLE);
+        }
+    }
+
+    
+    // desenha as caixinhas/opções
+    for (int i = 0; i < 4; i++) {
+        Caixinha *c = &opcoes[i];
+        Color fundo = c->selecionada ? YELLOW : LIGHTGRAY;
+        Color borda = c->selecionada ? ORANGE : DARKGRAY;
+
+        DrawRectangleRec(c->area, fundo);
+        DrawRectangleLinesEx(c->area, 2, borda);
+
+        int textWidth = MeasureText(c->texto, 20);
+        float textX = c->area.x + (c->area.width - textWidth)/2.0f;
+        float textY = c->area.y + (c->area.height - 20)/2.0f;
+        DrawText(c->texto, (int)textX, (int)textY, 20, BLACK);
+    }
+    // desenha o botão de verificar
+    if (GuiButton(botaoVerificar, "VERIFICAR")) {
+        int indiceSelecionado = -1;
+        for (int i = 0; i < 4; i++) if (opcoes[i].selecionada) { indiceSelecionado = i; break; }
+
+        if (indiceSelecionado == -1) {
+            mensagem = "Escolhe um comando primeiro.";
+            corMensagem = RED;
+        } else if (opcoes[indiceSelecionado].correta) {
+            mensagem = "Perfeito! Resposta correta.";
+            corMensagem = DARKGREEN;
+        } else {
+            mensagem = "Ta errado. Tenta de novo.";
+            corMensagem = MAROON;
+        }
+    }
+    // desenha a mensagem de feedback
+    if (mensagem[0] != '\0') {
+        DrawText(mensagem, 70, 440, 20, corMensagem);
+    }
+    
+	if (IsKeyPressed(KEY_ENTER)) {
+		return TELA_BAU; 
+	}		
+	
+    return TELA_DESAFIOS2;
+}

@@ -80,7 +80,7 @@ const DadosCombateInimigo ESTATUAS = {
     }
 };
 
-const DadosCombateInimigo GOBLIN = {
+const DadosCombateInimigo GOBLIN_SAQUEADOR = {
     .nome = "Goblin Saqueador",
     .vidaMax = 80,
     .qtdAtaques = 3,
@@ -117,7 +117,7 @@ EstadoTela telaEntrada(Imagens *imagens, int LARGURA, int ALTURA) {
         carregado = true;
     }
 
-    DrawTexture(imagens->cenario[DUNGEON], 0, 0, WHITE);
+    DrawTexture(imagens->cenario[MASMORRA_ENTRADA_SELO], 0, 0, WHITE);
     DrawText("SALA: ENTRADA", 20, 20, 20, LIGHTGRAY);
     
     //Game states dentro da sala
@@ -233,26 +233,30 @@ EstadoTela telaEnigma(Imagens *imagens, int LARGURA, int ALTURA) {
         carregado = true;
     }
 
+
     // Variaveis do puzzle
     static int perguntaAtual = 0; 
     static bool enigmaResolvido = false;
 
 
     // Fundo
-    DrawTexture(imagens->cenario[DUNGEON], 0, 0, WHITE);
+    DrawTexture(imagens->cenario[SALA_ESTATUAS], 0, 0, WHITE);
+    DrawTexture(imagens->personagem[ESTATUA_COMBATE], 0, 0, WHITE);
     DrawText("SALA: ENIGMA DAS VARIAVEIS", 20, 20, 20, LIGHTGRAY);
 
 
     // Diálogo
     if (!dialogoConcluido) {
         if (!GerenciarDialogo(falasEnigma, &linhaAtual, totalFalas, LARGURA, ALTURA)) {
-            dialogoConcluido = true; // Acabou a conversa, libera o puzzle
+			dialogoConcluido = true; // Acabou a conversa, libera o puzzle
         } else {
             return TELA_ENIGMA; // Enquanto conversa, não faz mais nada
         }
     }
 
-    // Puzzle entra por aqui
+    if(dialogoConcluido){
+    	return TELA_DESAFIOS2;
+	}
     
 
     DrawRectangle(0, 0, LARGURA, ALTURA, DARKGREEN);
@@ -294,16 +298,15 @@ EstadoTela telaBau(Imagens *imagens, int LARGURA, int ALTURA) {
     }
 
     // Desenha o fundo
-    DrawRectangle(0, 0, LARGURA, ALTURA, GOLD); 
     DrawText("SALA: O BAU ESTRANHO", 20, 20, 20, BLACK);
-    
+    DrawTexture(imagens->cenario[MASMORRA_ENTRADA], 0, 0, WHITE);
+    DrawTexture(imagens->personagem[ORNACIO], 0, 0, WHITE);
+
     switch (estadoSala) {
         
         case 0: // DIÁLOGO INICIAL
             if (!GerenciarDialogo(falasBau, &linhaAtual, totalFalas, LARGURA, ALTURA)) {
-                DrawText("A placa diz:", 200, 300, 20, BLACK);
-                DrawText("'Diga meu nome usando a Lingua Antiga...'", 200, 330, 20, DARKGRAY);
-                DrawText("Pressione ENTER para tentar responder.", 200, 400, 20, WHITE);
+            	DrawText("ENTER para começar", 200, 400, 20, BLACK);
                 
                 if (IsKeyPressed(KEY_ENTER)) {
                     estadoSala = 1; // Vai configurar o desafio
@@ -336,21 +339,21 @@ EstadoTela telaBau(Imagens *imagens, int LARGURA, int ALTURA) {
             break;
 
         case 3: // TRANSIÇÃO
-            DrawText("O BAU SE ABRIU!", 250, 200, 40, DARKGREEN);
-            DrawText("Mas a chave brilha de uma forma estranha...", 170, 260, 20, BLACK);
-            DrawText("Voce nao consegue pega-la com as maos.", 170, 290, 20, BLACK);
-            DrawText("Voce precisa LER a variavel para sua memoria.", 170, 320, 20, BLACK);
-            
-            DrawText("Pressione ENTER para usar o comando de Leitura.", 170, 400, 20, WHITE);
-            
-            if (IsKeyPressed(KEY_ENTER)) {
-                estadoSala = 4;
+            int linhas = contaLinhas("./dialogos/bau2.txt"); 
+        	falasBau = carregarDialogo("./dialogos/bau2.txt", linhas, &totalFalas);
+            if (!GerenciarDialogo(falasBau, &linhaAtual, totalFalas, LARGURA, ALTURA)) {
+            	DrawText("ENTER para começar", 215, 400, 20, BLACK);
+                
+                if (IsKeyPressed(KEY_ENTER)) {
+                    estadoSala = 4; // Vai configurar o desafio
+                }
             }
+           
             break;
 
         case 4: // CONFIGURAR DESAFIO 2 (SCANF)
             configurarInput(
-                "Para pegar a chave (inteiro), precisamos LER\no valor para o endereço de memoria.", 
+                "O baú está aberto. Para pegar a chave(variável),\n precisamos LER o valor(inteiro) para o endereço de memoria.", 
                 "scanf(\"%d\", &chave);", 
                 TELA_LABIRINTO, 
                 TELA_BAU
@@ -494,7 +497,7 @@ EstadoTela telaLabirinto(Imagens *imagens, int LARGURA, int ALTURA) {
         } else {
             if (IsKeyPressed(KEY_C) && !combateIniciado) {
         		// Inicia o combate com os dados personalizados
-       			IniciarCombate(GOBLIN); 
+       			IniciarCombate(GOBLIN_SAQUEADOR); 
         
         		combateIniciado = true;
         		return TELA_COMBATE;
@@ -509,7 +512,7 @@ EstadoTela telaLabirinto(Imagens *imagens, int LARGURA, int ALTURA) {
             progresso++; 
         } else {
             // Errou
-            IniciarCombate(GOBLIN);
+            IniciarCombate(GOBLIN_SAQUEADOR);
             return TELA_COMBATE;
         }
     }
@@ -538,8 +541,9 @@ EstadoTela telaLacos(Imagens *imagens, int LARGURA, int ALTURA) {
 
     static bool combateIniciado = false;
 
-    DrawRectangle(0, 0, LARGURA, ALTURA, MAROON);
     DrawText("BATALHA DOS LACOS", 50, 50, 30, WHITE);
+    DrawTexture(imagens->cenario[TOPO_TORRE], 0, 0, WHITE);
+
 
     if (!dialogoConcluido) {
         if (!GerenciarDialogo(falasLacos, &linhaAtual, totalFalas, LARGURA, ALTURA)) {

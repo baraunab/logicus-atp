@@ -7,6 +7,7 @@ typedef enum {
     TITULO_ARTE,
     GRIMORIO,
     IMAGEM_FUNDO,
+    MAPA_TORRE,
     FUNDO_GENERICO,
     SAVES_FUNDO,
     BOTAO_NORMAL,
@@ -15,6 +16,7 @@ typedef enum {
     BOTAO_APAGAR_SAVE,
     BOTAO_APAGAR_SAVE_FOCADO,
     BOTAO_APAGAR_SAVE_INATIVO,
+    TORRE,
     QTD_INTERFACES   
 
 } Interfaces;
@@ -23,15 +25,31 @@ typedef enum {
 typedef enum {
     // TODO: desenhar e carregar cenarios
     DUNGEON,
-    TORRE,
+    MASMORRA_ENTRADA,
+    MASMORRA_ENTRADA_SELO,
+    SALA_ESTATUAS,
+    TOPO_TORRE,
+    MORTE,
+    CREDITOS_FINAL,
     QTD_CENARIOS
 } Cenarios;
 
 // identificadores de sprites de personagens
 typedef enum {
     // TODO: desenhar e carregar sprites de personagem
-    MAGA_COSTAS,
-    QTD_PERSONAGENS
+    BECKY1,
+    BECKY2,
+    BECKY3,
+    ESTATUA,
+    ESTATUA_COMBATE,
+    GOBLIN,
+    ORNACIO,
+    BANDO_MONSTROS,
+    LORDC,
+    LORDC_COMBATE,
+    LORDC_ACABADO,
+    QTD_PERSONAGENS,
+
 } Personagens;
 
 typedef struct {

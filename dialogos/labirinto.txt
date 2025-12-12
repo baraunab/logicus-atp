@@ -3,3 +3,7 @@ Becky|Acho que acabei me perdendo
 Becky|Ei, espera ai... Eu já vi aquela pedra!!
 Becky|E aquele padrão de parede também!
 Becky|Isso é... Um labirinto!
+Becky|Tem algo escrito nas paredes...
+Becky|São instruções!
+Becky|Vou interpretar e ver o que acontece!
+

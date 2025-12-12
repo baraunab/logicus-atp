@@ -200,7 +200,9 @@ EstadoTela AtualizarCombate(Imagens *imagens, int LARGURA, int ALTURA) {
             break;
 
         case FASE_VITORIA:
-            if (batalha.timerAnimacao > 3.0f) return TELA_MAPA;
+            if (batalha.timerAnimacao > 3.0f){
+            	DrawTexture((*imagens).cenario[CREDITOS_FINAL], LARGURA * 0, ALTURA * 0, WHITE);
+			} 
             break;
 
         case FASE_DERROTA:
@@ -216,8 +218,10 @@ EstadoTela AtualizarCombate(Imagens *imagens, int LARGURA, int ALTURA) {
     DrawEllipse(180, 350, 120, 40, Fade(LIGHTGRAY, 0.5f));
 
     // Sprites
-    DrawRectangle(LARGURA - 200, 80, 100, 100, MAROON); 
-    DrawRectangle(130, 210, 100, 100, BLUE);
+    //DrawRectangle(LARGURA - 200, 80, 100, 100, MAROON); 
+    //DrawRectangle(130, 210, 100, 100, BLUE);
+    DrawTexture((*imagens).personagem[LORDC_COMBATE], LARGURA * 0.67, ALTURA * 0, WHITE);
+    DrawTexture((*imagens).personagem[BECKY2], LARGURA * 0, ALTURA * 0, WHITE);
 
     // Painéis
     DesenharStatusBox(50, 30, batalha.nomeInimigo, batalha.vidaInimigoAtual, batalha.vidaInimigoMax, false);

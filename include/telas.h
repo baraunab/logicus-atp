@@ -27,6 +27,7 @@ typedef enum {
     TELA_DESAFIO3,
     TELA_DESAFIO4,
     TELA_DESAFIO5,
+    TELA_DESAFIOS2,
   
     TELA_CAIXINHAS,
     TELA_GRIMORIO,
@@ -57,6 +58,9 @@ EstadoTela telaEnigma(Imagens *imagens, int LARGURA, int ALTURA);
 EstadoTela telaBau(Imagens *imagens, int LARGURA, int ALTURA);
 EstadoTela telaLabirinto(Imagens *imagens, int LARGURA, int ALTURA);
 EstadoTela telaLacos(Imagens *imagens, int LARGURA, int ALTURA);
+
+
+EstadoTela desafioCaixinhasS2(void);
 
 //Variavel para entregar para as outras telas o resultado do ultimo input
 extern bool UltimoInputFoiSucesso;
