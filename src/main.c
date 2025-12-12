@@ -38,9 +38,6 @@ int main(void) {
     
     // declara a tela inicial ao abrir o programa
     EstadoTela tela = TELA_MENU;
-  
-    //Variavel para controlar em qual sala o jogador está
-    int idSalaAtual = ID_SALA_NULA;
 
     // inicializa janela da biblioteca RayGUI
     InitWindow(LARGURA, ALTURA, "Logicus;");
@@ -60,7 +57,7 @@ int main(void) {
             ClearBackground(GetColor(GuiGetStyle(DEFAULT, 20)));
 
             // através desta função acontecem todas as transições
-            if (mudarTela(&tela, &imagens, LARGURA, ALTURA, &idSalaAtual)) {
+            if (mudarTela(&tela, &imagens, LARGURA, ALTURA)) {
                 break;
             }
 

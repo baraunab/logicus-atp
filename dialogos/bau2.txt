@@ -1,0 +1,4 @@
+Narrador|Com o baú aberto, você vê a chave
+Narrador|Mas não consegue pegá-la com a mão
+Narrador|Ela é pura energia
+Narrador|Voce deve usar a língua antiga

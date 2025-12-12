@@ -20,4 +20,6 @@ int contaLinhas (char *nomeArquivo);
 // função para carregar as linhas de dialogo
 Dialogo *carregarDialogo (char *nomeArquivo, int linhas, int *totalDialogos);
 
+// função de gerenciamento de dialogo
+bool GerenciarDialogo(Dialogo *dialogos, int *linhaAtual, int totalLinhas, int LARGURA, int ALTURA);
 #endif // DIALOGO_H

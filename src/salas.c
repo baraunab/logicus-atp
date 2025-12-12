@@ -1,76 +1,59 @@
+#include "raylib.h"
+#include "raygui.h"
+#include "recursos.h"
+#include "telas.h"
 #include "salas.h"
-#include "raygui.h" // Necessário para os botões
 
-EstadoTela telaMapa(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA, int *idSalaAtual) {
+// Struct local para facilitar a criação dos botões
+typedef struct {
+    Rectangle area;
+    EstadoTela telaDestino;
+    const char *nome;
+    Color cor;
+} BotaoNoMapa;
+
+EstadoTela telaMapa(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA) {
     
-    /*
-        Dados referentes as salas (ID, posição no mapa interativo etc.
-        Usamos static para criar apenas uma vez na memória
-    */
-    static SalaMapa salas[] = {
-        // [0] Bibliotecas
-        { (Rectangle){ 100, 200, 100, 100 }, ID_SALA_BIBLIOTECAS, "Bibliotecas", GREEN },
-        // [1] Main
-        { (Rectangle){ 250, 200, 100, 100 }, ID_SALA_MAIN, "Main()", YELLOW },
-        // [2] Variaveis
-        { (Rectangle){ 400, 200, 100, 100 }, ID_SALA_VARIAVEIS, "Variaveis", ORANGE },
-        // [3] Output
-        { (Rectangle){ 550, 100, 100, 100 }, ID_SALA_PRINT, "Output", RED },
-        // [4] Input
-        { (Rectangle){ 550, 300, 100, 100 }, ID_SALA_SCAN, "Input", RED }
+    // Definição das 5 fases
+    static BotaoNoMapa fases[] = {
+        // Posição X, Y, Largura, Altura - Destino - Texto - Cor
+        { { 350, 400, 100, 50 }, TELA_ENTRADA,   "Entrada",   DARKGREEN },
+        { { 350, 325, 100, 50 }, TELA_ENIGMA,    "Enigma das\nvariáveis",    PURPLE    },
+        { { 350, 250, 100, 50 }, TELA_BAU,       "Bau\nestranho",       GOLD      },
+        { { 350, 175, 100, 50 }, TELA_LABIRINTO, "Labirinto\ncondicional", DARKBLUE  },
+        { { 350, 100, 100, 50 }, TELA_LACOS,     "Batalha dos\nlaços",   MAROON    }
     };
 
     EstadoTela proximaTela = *tela;
 
-    // Fundo e linhas de conexão
+    // Desenho do fundo do mapa
     DrawRectangle(0, 0, LARGURA, ALTURA, RAYWHITE);
-    DrawText("MAPA DA MASMORRA", LARGURA/2 - 100, 20, 20, BLACK);
-    DrawText("Selecione a sala que deseja adentrar", LARGURA/2 - 120, 50, 16, DARKGRAY);
+    DrawText("MAPA DA MASMORRA", LARGURA/2 - MeasureText("MAPA DA MASMORRA", 20)/2, 20, 20, BLACK);
 
-    
-    DrawLine(200, 250, 250, 250, BLACK); // Biblioteca -> Main
-    DrawLine(350, 250, 400, 250, BLACK); // Main -> Variaveis
-    DrawLine(500, 250, 550, 150, BLACK); // Variaveis -> Output
-    DrawLine(500, 250, 550, 350, BLACK); // Variaves -> Input
-
-    // Deixa o fundo do botão transparente para usar a cor personalizada da sala
+    // Botões
     GuiSetStyle(BUTTON, BASE_COLOR_NORMAL, ColorToInt(BLANK));
     
+    // Armazena o tamanho original da fonte
+    int tamanhoOriginal = GuiGetStyle(DEFAULT, TEXT_SIZE); 
+    
+    // Define novo tamanho para a fonte das áreas clicáveis do mapa
+    GuiSetStyle(DEFAULT, TEXT_SIZE, 15);
 
-    // Botão 0: Bibliotecas
-    DrawRectangleRec(salas[0].area, Fade(salas[0].cor, 0.4f));
-    if (GuiButton(salas[0].area, salas[0].nome)) {
-        *idSalaAtual = salas[0].idProximaSala; // Atualiza o ID
-        proximaTela = TELA_SALA;               // Muda a tela
-    }
+    int qtd = sizeof(fases) / sizeof(fases[0]);
+    
+    for (int i = 0; i < qtd; i++) {
+        // Fundo colorido
+        DrawRectangleRec(fases[i].area, Fade(fases[i].cor, 0.4f));
+        DrawRectangleLinesEx(fases[i].area, 2, fases[i].cor);
 
-    // Botão 1: Main
-    DrawRectangleRec(salas[1].area, Fade(salas[1].cor, 0.4f));
-    if (GuiButton(salas[1].area, salas[1].nome)) {
-        *idSalaAtual = salas[1].idProximaSala;
-        proximaTela = TELA_SALA;
+        // Botão invisível e Texto
+        if (GuiButton(fases[i].area, fases[i].nome)) {
+            proximaTela = fases[i].telaDestino;
+        }
     }
-
-    // Botão 2: Variaveis
-    DrawRectangleRec(salas[2].area, Fade(salas[2].cor, 0.4f));
-    if (GuiButton(salas[2].area, salas[2].nome)) {
-        *idSalaAtual = salas[2].idProximaSala;
-        proximaTela = TELA_SALA;
-    }
-
-    // Botão 3: Output
-    DrawRectangleRec(salas[3].area, Fade(salas[3].cor, 0.4f));
-    if (GuiButton(salas[3].area, salas[3].nome)) {
-        *idSalaAtual = salas[3].idProximaSala;
-        proximaTela = TELA_SALA;
-    }
-
-    // Botão 4: Input
-    DrawRectangleRec(salas[4].area, Fade(salas[4].cor, 0.4f));
-    if (GuiButton(salas[4].area, salas[4].nome)) {
-        *idSalaAtual = salas[4].idProximaSala;
-        proximaTela = TELA_SALA;
-    }
+    
+    // Restaura o tamanho original da fonte para não afetar outras telas
+    GuiSetStyle(DEFAULT, TEXT_SIZE, tamanhoOriginal);
 
     DrawText("Aperte 'M' para voltar ao Jogo", 10, ALTURA - 30, 15, GRAY);
     

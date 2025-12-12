@@ -1,4 +1,3 @@
-// se alterar, favor manter a ordem das includes de bibliotecas
 #include <string.h>
 #include <stdio.h>
 #include "raylib.h"
@@ -9,11 +8,15 @@
 
 // VARIAVEIS DE CONTROLE ---------------------------------------------------------------------------------
 
+bool UltimoInputFoiSucesso = false;
     // maximo de caracteres por linha com tamanho de fonte 20 é de 68 caracteres
-    char strEnunciado[] = "Escreva uma estrutura de repetição \"For()\" com os seguintes\nparâmetros: Índice (de nome \'i\') sendo um inteiro igual a 0; A Condição\ndeve ser uma comparação entre o índice e um inteiro igual a 10; O\ncomando deve incrementar uma unidade no índice a cada ciclo do laço.\n\nNão use chaves depois de fechar a função, apenas finalize (sem ponto\ne vírgula). Também preze pela legibilidade do código";
-    char resposta [] = "Digite aqui sua resposta.";
-    char respostaCorreta [] = "for (int i = 0; i < 10; i++)";
-
+    const char *strEnunciado = "A definir";
+    char resposta [256] = "digite aqui sua resposta";
+    const char *respostaCorreta = "resposta";
+	
+	EstadoTela destinoSucesso = TELA_MENU;
+    EstadoTela destinoFalha = TELA_MENU;
+    
     Rectangle areaBotaoAceitar;
     Rectangle areaBotaoRecusar;
     Rectangle areaBotaoVerificar;
@@ -32,14 +35,32 @@
     bool desafioFeito = false;
 
 // FIM DAS VARIAVEIS DE CONTROLE -------------------------------------------------------------------------
+//função para configurar o desafio em cada tela
+void configurarInput(const char *pergunta, const char *gabarito, EstadoTela sucesso, EstadoTela falha) {
+    strEnunciado = pergunta;
+    respostaCorreta = gabarito;
+    destinoSucesso = sucesso;
+    destinoFalha = falha;
+
+    // Reseta as variaveis de controle para o novo desafio
+    desativarFundo = false;
+    label = false;
+    resultado = false;
+    tabClicado = false;
+    desafioFeito = false;
+    strcpy(resposta, "Digite aqui sua resposta.");
+    
+    // Reseta o status global do resultado
+    UltimoInputFoiSucesso = false;
+}
 
 EstadoTela telaInput(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA) {
 
     // CAIXA DO ENUNCIADO --------------------------------------------------------------------------------
     
     DrawRectangleRounded((Rectangle){LARGURA * 0.01, ALTURA * 0.25, LARGURA * 0.98, ALTURA * 0.50}, 0.1f, 10, (Color){255, 255, 255, (255)/1});
-    DrawText("Eu te desafio a escrever uma", LARGURA * 0.04, ALTURA * 0.06, 30, WHITE);
-    DrawText("ESTRUTURA DE REPETIÇÃO", LARGURA * 0.04, ALTURA * 0.13, 30, RED);
+
+    DrawText("DESAFIO DE SINTAXE", LARGURA * 0.04, ALTURA * 0.11, 50, RED);
     
     DrawText(strEnunciado, LARGURA * 0.04, ALTURA * 0.275, 20, BLACK);
 
@@ -162,7 +183,7 @@ EstadoTela telaInput(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA
                 desativarFundo = false;
             }
             if (IsKeyPressed(KEY_ENTER)) {
-                return TELA_CAIXINHAS;
+                return destinoFalha;
             }
             
 
@@ -182,8 +203,9 @@ EstadoTela telaInput(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA
                     resultado = false,
                     tabClicado = false;
                     desafioFeito = true;
-
-                    return TELA_CAIXINHAS;
+					
+					UltimoInputFoiSucesso = true;
+                    return destinoSucesso;
                 }
 
             } else {
@@ -200,7 +222,9 @@ EstadoTela telaInput(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA
                     resultado = false,
                     tabClicado = false;
                     desafioFeito = true;
-                    return TELA_JOGO;
+                    
+                    UltimoInputFoiSucesso = false;
+                    return destinoFalha;
                     
                 }
             }

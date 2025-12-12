@@ -15,11 +15,11 @@ typedef struct Card {
 
 // array com os dados dos cards
 Card cardsGrimorio [5] = {
-	{"TEXTO1", "Texto dentro do card"},
-	{"TEXTO2", "Texto dentro do card"},
-	{"TEXTO3", "Texto dentro do card"},
-	{"TEXTO4", "Texto dentro do card"},
-	{"TEXTO5", "Texto dentro do card"}
+	{"pancada", "pancada();"},
+	{"Misseis mágicos", "for(i = 1, i != 0, misseis magicos)"},
+	{"Aniquilar", "if(inimigoVivo){aniquilar};"},
+	{"Lord C", "?????????"},
+	{"Ornácio", "Por algum motivo\no herói anotou isso"}
 };
 
 // fundo combinando com a cor da imagem

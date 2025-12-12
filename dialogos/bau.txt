@@ -1,0 +1,13 @@
+Becky|A cada andar os desafios desse lugar...
+Becky|Ficam mais estranhos...
+Becky|Espera... O que é aquilo?
+Becky|Um baú?
+Becky|Tem algo escrito numa plaquinha
+Placa|Diga meu nome em língua antiga
+Placa|E eu lhe entregarei a chave
+Becky|Espera, esse deve ser O BAÚ
+Lembrança|Tenho certeza que o herói anotou em algum lugar
+Lembrança|*olhando no grimório*
+Lembrança|Aqui! Ornácio é o nome dele
+Becky|Então vamos tentar!
+

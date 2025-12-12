@@ -18,7 +18,16 @@
     
 // FIM DA FOLHA DE ESTILO --------------------------------------------------------------------------------
 
-EstadoTela telaJogo(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA, int *idSalaAtual) {
+
+// VARIAVEIS DE CONTROLE ---------------------------------------------------------------------------------
+     
+    // int dialogoAtual; // inicia os indices de dialogos a serem lidos
+    
+    // usar laço for() para realizar a quebra de linhas
+    
+// FIM DAS VARIAVEIS DE CONTROLE -------------------------------------------------------------------------
+
+EstadoTela telaJogo(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA) {
     // VARIÁVEIS USADAS NA LEITURA DE ARQUIVO DOS DIÁLOGOS -----------------------------------------------
     
     /* 
@@ -66,7 +75,7 @@ EstadoTela telaJogo(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA,
     
     ClearBackground(RAYWHITE);
     
-     DrawTexture((*imagens).interface[IMAGEM_FUNDO], 0, 0, WHITE);
+     DrawTexture((*imagens).interface[TORRE], 0, 0, WHITE);
     Rectangle fundoDeTela = {0, ALTURA * 0.04, 800, 480};
 
     // calcula área de clique baseada no tamanho do texto
@@ -83,7 +92,7 @@ EstadoTela telaJogo(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA,
     DrawText("Salvar", areaSalvamentos.x, areaSalvamentos.y, 12, corStrSalvamentos);
 
 
-    if (saveEmUso->dialogoAtual == 5) { DrawTexture((*imagens).personagem[MAGA_COSTAS], 90, 20, WHITE); }
+    if (saveEmUso->dialogoAtual == 5) { DrawTexture((*imagens).personagem[BECKY1], 90, 20, WHITE); }
 
     // CAIXA DE DIALOGO
     DrawRectangleRounded((Rectangle){LARGURA * 0.01, ALTURA * 0.65, LARGURA * 0.98, ALTURA * 0.33}, 0.3f, 10, (Color){0, 0, 0, (255)/1.5});
@@ -138,21 +147,26 @@ EstadoTela telaJogo(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA,
                 // incrementa ao receber uma interação
                 saveEmUso->dialogoAtual++;
                 printf("%d\nClique na tela/Enter/Espaçamento\n", saveEmUso->dialogoAtual);
-            
+			            
                 // Reseta a animacao para o proximo dialogo
                 caracteresVisiveis = 0;
                 animacaoConcluida = false;
-
+				
                 if (saveEmUso->dialogoAtual == 4) { // se o siálogo for maior que 1
                 // troca a imagem de fundo atual por essa do endereço
-                    imagens->interface[IMAGEM_FUNDO] = carregarImagem(IMAGEM_FUNDO, "./imagens/dungeon.jpeg");
+					imagens->interface[TORRE] = carregarImagem(TORRE, "./imagens/dungeon.jpeg");
+                    
                 } else if (saveEmUso->dialogoAtual == 6){
-                    imagens->interface[IMAGEM_FUNDO] = carregarImagem(IMAGEM_FUNDO, "./imagens/arte_splash.png");
+                    imagens->interface[TORRE] = carregarImagem(TORRE, "./imagens/arte_splash.png");
                 }
-
+			
             } else {
                 // verifica o fim da leitura do arquivo
                 esperaInput = false;
+            }
+            
+            if (saveEmUso->dialogoAtual == 13) {
+            	return TELA_ENTRADA;
             }
         }
     }
