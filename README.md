@@ -9,17 +9,17 @@
 * <i>Logicus;</i> é um jogo que, por meio da ludicidade, incentiva o aprendizado de linguagem de programação e como aplicá-la em determinados contextos.
 
 ## 💻 Como surgiu?
-* <i>Logicus;</i> surgiu como um projeto de conclusão do primeiro período do curso de Tecnologia de Análise e Desenvolvimento de Sistemas, na matéria de Algoritmos e Técnicas de Programação.
+* <i>Logicus;</i> surgiu como um projeto de conclusão do primeiro período do curso de <b>Tecnologia de Análise e Desenvolvimento de Sistemas</b>, na matéria de Algoritmos e Técnicas de Programação.
 
 ## 📜 Como foi a produção?
-* No período de 3 de Novembro a 11 de Dezembro de 2025, <i>Logicus;</i> foi idealizado e produzido. Além da programação que faz o jogo rodar, as artes e o roteiro foram inteiramente produzidas pelos membros da equipe.
+* No período de <b>3 de Novembro a 11 de Dezembro de 2025</b>, <i>Logicus;</i> foi idealizado e produzido. Além da programação que faz o jogo rodar, as artes e o roteiro foram inteiramente produzidas pelos membros da equipe.
 
 ## 🧙‍♀️ Quem somos?
-* [Anthony Rodrigues 🧑‍💻 🎨](https://github.com/Girafales157) - Programador Front-End e designer de personagem;
+* [Anthony Rodrigues 🧑‍💻 🎨](https://github.com/Girafales157) - Programador Full-stack e Designer de personagens;
 * [Beatriz Barauna 🧑‍💻](https://github.com/baraunab) - Programadora Full-stack;
-* [Cauan Pinho 🧑‍💻](https://github.com/CauanPinho) - Programadoor Front-End;
+* [Cauan Pinho 🧑‍💻](https://github.com/CauanPinho) - Programador Full-stack;
 * [Ivo Rodrigues 🧑‍💻 ✒️](https://github.com/Ivo-Rodrigues99) - Programador Full-stack e Roteirista;
-* [Kinan Principe 🧑‍💻 🎨](https://github.com/kprincipe) - Programador Full-stack e designer de cenários;
+* [Kinan Principe 🧑‍💻 🎨](https://github.com/kprincipe) - Programador Full-stack e Designer de cenários;
 
 ## 🎮 O Jogo!
 * Essas são algumas telas que você irá encontrar!
@@ -62,6 +62,8 @@ $ make
 $ ./build/logicus
 ```
 ### Windows
+Digite os seguintes comandos no terminal do W64-DevKit:
+
 ```bash
 $ git clone https://github.com/baraunab/logicus-atp/
 $ cd logicus-atp
