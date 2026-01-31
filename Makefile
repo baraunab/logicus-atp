@@ -69,5 +69,7 @@ desafioCaixinhas.o: ./src/desafioCaixinhas.c
 telaGrimorio.o: ./src/telaGrimorio.c
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c ./src/telaGrimorio.c
 clean:
-	@rm -f $(OBJS) ./build/logicus
-	@echo "limpeza feita!"
+	rm $(OBJS) build/logicus
+	rm -r bibliotecas
+	rm -r saves
+	rmdir build
