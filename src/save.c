@@ -62,17 +62,17 @@ void carregarEstadoDeJogo(SaveEstado *estado, int slot) {
 
 void inicializarSistemaDeSave(SaveEstado *saveSlots) {
     for (int i = 0; i < 3; ++i) {
-        char nome[32];
-        snprintf(nome, 32, "saves/slot%d", i);
+        char caminho[32];
+        snprintf(caminho, 32, "saves/slot%d", i);
 
-        FILE *f = fopen(nome, "rb");
+        FILE *f = fopen(caminho, "rb");
         if (f == NULL) {
-            FILE *fp = fopen("nome", "wb");
-            fclose(fp);
+            // Slot ainda nao existe; nada a carregar.
             continue;
         }
 
         fread(&saveSlots[i], sizeof(SaveEstado), 1, f);
+        fclose(f);
     }
 }
 
