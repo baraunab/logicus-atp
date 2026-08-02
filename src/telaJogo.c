@@ -154,7 +154,7 @@ EstadoTela telaJogo(EstadoTela *tela, Imagens *imagens, int LARGURA, int ALTURA)
 				
                 if (saveEmUso->dialogoAtual == 4) { // se o siálogo for maior que 1
                 // troca a imagem de fundo atual por essa do endereço
-					imagens->interface[TORRE] = carregarImagem(TORRE, "./imagens/dungeon.jpeg");
+					imagens->interface[TORRE] = carregarImagem(TORRE, "./imagens/masmorra.png");
                     
                 } else if (saveEmUso->dialogoAtual == 6){
                     imagens->interface[TORRE] = carregarImagem(TORRE, "./imagens/arte_splash.png");
