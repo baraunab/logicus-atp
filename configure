@@ -1,0 +1,22 @@
+#!/usr/bin/sh
+
+if [ -d "bibliotecas/raylib" ]; then
+    echo "+ bibliotecas/raylib ja existe"
+else
+    git clone --depth=1 git@github.com:raysan5/raylib.git bibliotecas/raylib
+fi
+
+if [ -d "bibliotecas/raygui" ]; then
+    echo "+ bibliotecas/raygui ja existe"
+else
+    git clone --depth=1 git@github.com:raysan5/raygui.git bibliotecas/raygui
+fi
+
+if [ -f bibliotecas/raylib/src/libraylib.a ]; then
+    echo "+ libraylib ja existe"
+else
+    cd bibliotecas/raylib/src
+    make -j8
+fi
+
+echo "Pronto."

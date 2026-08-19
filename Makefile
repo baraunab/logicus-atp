@@ -1,15 +1,19 @@
 CC=gcc
 
 OBJS=main.o caixinhas.o combate.o desafioCaixinhas.o dialogo.o mudarTela.o recursos.o salas.o save.o telaGrimorio.o telaInicial.o telaInput.o telaJogo.o telaMenu.o telaSala.o
+TARGET=linux
 
+ifeq ($(TARGET), windows)
+	LIBS=-lraylib -lopengl32 -lgdi32 -lwinmm
+endif
+
+LIBS=-lraylib -lm -lX11
 
 all: logicus
 
-logicus: main.o
-	gcc -o logicus $(OBJS) -Ibibliotecas/raylib/src -Ibibliotecas/raygui/src -Iinclude -Lbibliotecas/raylib/src -lraylib -lopengl32 -lgdi32 -lwinmm
-
-main.o: $(OBJS)
+logicus: $(OBJS)
 	$(CC) -c src/main.c -Ibibliotecas/raylib/src -Ibibliotecas/raygui/src -Iinclude -Lbibliotecas/raylib/src
+	gcc -o logicus $(OBJS) -Ibibliotecas/raylib/src -Ibibliotecas/raygui/src -Iinclude -Lbibliotecas/raylib/src $(LIBS)
 
 telaSala.o: src/telaSala.c
 	$(CC) -c src/telaSala.c -Ibibliotecas/raylib/src -Ibibliotecas/raygui/src -Iinclude
@@ -18,7 +22,7 @@ caixinhas.o: src/caixinhas.c
 	$(CC) -c src/caixinhas.c -Ibibliotecas/raylib/src -Ibibliotecas/raygui/src -Iinclude
 
 recursos.o: src/recursos.c
-	$(CC) -c src/recursos.c -Ibibliotecas/raylib/src -Ibibliotecas/raygui/src -Iinclude -Lbibliotecas/raylib/src -lopengl32 -lgdi32 -lraylib -lwinmm
+	$(CC) -c src/recursos.c -Ibibliotecas/raylib/src -Ibibliotecas/raygui/src -Iinclude -Lbibliotecas/raylib/src $(LIBS)
 
 save.o: src/save.c
 	$(CC) -c src/save.c -Ibibliotecas/raylib/src -Ibibliotecas/raygui/src -Iinclude
