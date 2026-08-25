@@ -4,9 +4,9 @@
 
 // importacao de arquivos header de bibliotecas third party
 
-#define RAYGUI_IMPLEMENTATION
-
 #include "raylib.h"
+
+#define RAYGUI_IMPLEMENTATION
 #include "raygui.h"
 
 // importacao de arquivos header de prototipacao e carregamento

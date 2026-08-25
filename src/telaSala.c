@@ -1,6 +1,8 @@
 #include <stdio.h>
+
 #include "raylib.h"
 #include "raygui.h"
+
 #include "recursos.h"
 #include "telas.h"
 #include "dialogo.h"
