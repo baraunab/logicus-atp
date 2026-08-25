@@ -15,6 +15,9 @@ logicus: $(OBJS)
 	$(CC) -c src/main.c -Ibibliotecas/raylib/src -Ibibliotecas/raygui/src -Iinclude -Lbibliotecas/raylib/src
 	gcc -o logicus $(OBJS) -Ibibliotecas/raylib/src -Ibibliotecas/raygui/src -Iinclude -Lbibliotecas/raylib/src $(LIBS)
 
+main.o: src/main.c
+	$(CC) -c src/main.c -Ibibliotecas/raylib/src -Ibibliotecas/raygui/src -Iinclude
+
 telaSala.o: src/telaSala.c
 	$(CC) -c src/telaSala.c -Ibibliotecas/raylib/src -Ibibliotecas/raygui/src -Iinclude
 	
