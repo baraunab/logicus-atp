@@ -1,73 +1,64 @@
-CFLAGS = -Wall
+CC=gcc
 
-ifeq ($(OS),Windows_NT)
-    DEPS = -lraylib -lm -lopengl32 -lgdi32 -lwinmm
-else
-    DEPS = -lraylib -lm
+OBJS=main.o caixinhas.o combate.o desafioCaixinhas.o dialogo.o mudarTela.o recursos.o salas.o save.o telaGrimorio.o telaInicial.o telaInput.o telaJogo.o telaMenu.o telaSala.o
+TARGET=linux
+
+ifeq ($(TARGET), windows)
+	LIBS=-lraylib -lopengl32 -lgdi32 -lwinmm
 endif
 
-CC = gcc
+LIBS=-lraylib -lm -lX11
 
-INCLUDE = ./include 
+all: logicus
 
-RL_LDD = $(PWD)/bibliotecas/raylib/src
-RL_INC = ./bibliotecas/raylib/src
-RG_INC = ./bibliotecas/raygui/src
+logicus: $(OBJS)
+	$(CC) -c src/main.c -Ibibliotecas/raylib/src -Ibibliotecas/raygui/src -Iinclude -Lbibliotecas/raylib/src
+	gcc -o logicus $(OBJS) -Ibibliotecas/raylib/src -Ibibliotecas/raygui/src -Iinclude -Lbibliotecas/raylib/src $(LIBS)
 
-OBJS = telaSala.o caixinhas.o recursos.o save.o dialogo.o main.o mudarTela.o telaInicial.o telaMenu.o telaJogo.o telaInput.o salas.o combate.o desafioCaixinhas.o telaGrimorio.o
+main.o: src/main.c
+	$(CC) -c src/main.c -Ibibliotecas/raylib/src -Ibibliotecas/raygui/src -Iinclude
 
-CPPFLAGS = -I$(RL_INC) -I$(RG_INC) -I$(INCLUDE)
-
-all: ./build/logicus
-
-./build/logicus: $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o ./build/logicus -L$(RL_LDD) -Wl,-rpath=$(RL_LDD) $(DEPS)
-
-main.o: ./src/main.c
-	$(CC) $(CFLAGS) $(CPPFLAGS) -c ./src/main.c
-
-save.o: ./src/save.c
-	$(CC) $(CFLAGS) $(CPPFLAGS) -c ./src/save.c
-
-dialogo.o: ./src/dialogo.c
-	$(CC) $(CFLAGS) $(CPPFLAGS) -c ./src/dialogo.c
-
-recursos.o: ./src/recursos.c
-	$(CC) $(CFLAGS) -c ./src/recursos.c -I$(INCLUDE) -I$(RL_INC) -I$(RL_INC)
+telaSala.o: src/telaSala.c
+	$(CC) -c src/telaSala.c -Ibibliotecas/raylib/src -Ibibliotecas/raygui/src -Iinclude
 	
-mudarTela.o: ./src/mudarTela.c
-	$(CC) $(CFLAGS) -c ./src/mudarTela.c -I$(INCLUDE) -I$(RL_INC) -I$(RL_INC) -I$(RG_INC)
+caixinhas.o: src/caixinhas.c
+	$(CC) -c src/caixinhas.c -Ibibliotecas/raylib/src -Ibibliotecas/raygui/src -Iinclude
 
-telaInicial.o: ./src/telaInicial.c
-	$(CC) $(CFLAGS) -c ./src/telaInicial.c -I$(INCLUDE) -I$(RL_INC) -I$(RL_INC) -I$(RG_INC)
+recursos.o: src/recursos.c
+	$(CC) -c src/recursos.c -Ibibliotecas/raylib/src -Ibibliotecas/raygui/src -Iinclude -Lbibliotecas/raylib/src $(LIBS)
 
-telaMenu.o: ./src/telaMenu.c
-	$(CC) $(CFLAGS) -c ./src/telaMenu.c -I$(INCLUDE) -I$(RL_INC) -I$(RL_INC) -I$(RG_INC)
+save.o: src/save.c
+	$(CC) -c src/save.c -Ibibliotecas/raylib/src -Ibibliotecas/raygui/src -Iinclude
 
-telaJogo.o: ./src/telaJogo.c
-	$(CC) $(CFLAGS) -c ./src/telaJogo.c -I$(INCLUDE) -I$(RL_INC) -I$(RL_INC) -I$(RG_INC)
+dialogo.o: src/dialogo.c
+	$(CC) -c src/dialogo.c -Ibibliotecas/raylib/src -Ibibliotecas/raygui/src -Iinclude
 
-telaInput.o: ./src/telaInput.c
-	$(CC) $(CFLAGS) -c ./src/telaInput.c -I$(INCLUDE) -I$(RL_INC) -I$(RL_INC) -I$(RG_INC)
+mudarTela.o: src/mudarTela.c
+	$(CC) -c src/mudarTela.c -Ibibliotecas/raylib/src -Ibibliotecas/raygui/src -Iinclude
 
-salas.o: ./src/salas.c
-	$(CC) $(CFLAGS) -c ./src/salas.c -I$(INCLUDE) -I$(RL_INC) -I$(RG_INC)
+telaInicial.o: src/telaInicial.c
+	$(CC) -c src/telaInicial.c -Ibibliotecas/raylib/src -Ibibliotecas/raygui/src -Iinclude
 
-combate.o: ./src/combate.c
-	$(CC) $(CFLAGS) -c ./src/combate.c -I$(INCLUDE) -I$(RL_INC) -I$(RG_INC)
+telaMenu.o: src/telaMenu.c
+	$(CC) -c src/telaMenu.c -Ibibliotecas/raylib/src -Ibibliotecas/raygui/src -Iinclude
 
-telaSala.o: ./src/telaSala.c
-	$(CC) $(CFLAGS) -c ./src/telaSala.c -I$(INCLUDE) -I$(RL_INC) -I$(RG_INC)
+telaJogo.o: src/telaJogo.c
+	$(CC) -c src/telaJogo.c -Ibibliotecas/raylib/src -Ibibliotecas/raygui/src -Iinclude
 
-caixinhas.o: ./src/caixinhas.c
-	$(CC) $(CFLAGS) $(CPPFLAGS) -c ./src/caixinhas.c
+telaInput.o: src/telaInput.c
+	$(CC) -c src/telaInput.c -Ibibliotecas/raylib/src -Ibibliotecas/raygui/src -Iinclude
 
-desafioCaixinhas.o: ./src/desafioCaixinhas.c
-	$(CC) $(CFLAGS) $(CPPFLAGS) -c ./src/desafioCaixinhas.c
+salas.o: src/salas.c
+	$(CC) -c src/salas.c -Ibibliotecas/raylib/src -Ibibliotecas/raygui/src -Iinclude
 
+combate.o: src/combate.c
+	$(CC) -c src/combate.c -Ibibliotecas/raylib/src -Ibibliotecas/raygui/src -Iinclude
 
-telaGrimorio.o: ./src/telaGrimorio.c
-	$(CC) $(CFLAGS) $(CPPFLAGS) -c ./src/telaGrimorio.c
+desafioCaixinhas.o: src/desafioCaixinhas.c
+	$(CC) -c src/desafioCaixinhas.c -Ibibliotecas/raylib/src -Ibibliotecas/raygui/src -Iinclude
+
+telaGrimorio.o: src/telaGrimorio.c
+	$(CC) -c src/telaGrimorio.c -Ibibliotecas/raylib/src -Ibibliotecas/raygui/src -Iinclude
+
 clean:
-	@rm -f $(OBJS) ./build/logicus
-	@echo "limpeza feita!"
+	del *.o
